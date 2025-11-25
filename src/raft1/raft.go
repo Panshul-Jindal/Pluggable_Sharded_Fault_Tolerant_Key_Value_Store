@@ -241,6 +241,16 @@ func (rf *Raft) killed() bool {
 
 func (rf *Raft) ticker() {
 	for !rf.killed() {
+		rf.mu.Lock()
+		state := rf.state
+		rf.mu.Unlock()
+
+		// IF LEADER: Send Heartbeats repeatedly
+		if state == Leader {
+			rf.broadcastHeartbeats()
+			time.Sleep(100 * time.Millisecond) // Heartbeat interval (approx 10/sec)
+			continue
+		}
 
 		// Your code here (3A)
 		// Check if a leader election should be started.
@@ -334,4 +344,83 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	go rf.ticker()
 
 	return rf
+}
+
+type AppendEntriesArgs struct {
+	Term         int
+	LeaderId     int
+	PrevLogIndex int
+	PrevLogTerm  int
+	Entries      []*LogEntry
+	LeaderCommit int
+}
+
+type AppendEntriesReply struct {
+	Term    int
+	Success bool
+}
+
+func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply) {
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
+
+	if reply.Term < rf.currentTerm || args.Entries[args.PrevLogIndex].EntryTerm != reply.Term {
+		reply.Success = false
+		reply.Term = rf.currentTerm
+		return
+	}
+
+	rf.currentTerm = args.Term
+	rf.state = Follower
+	rf.votedFor = -1
+	rf.lastHeartbeat = time.Now()
+
+	// Todo: 3B logic
+
+	reply.Success = true
+	reply.Term = rf.currentTerm
+}
+
+func (rf *Raft) sendAppendEntries(server int, args *AppendEntriesArgs, reply *AppendEntriesReply) bool {
+	ok := rf.peers[server].Call("Raft.AppendEntries", args, reply)
+	return ok
+}
+
+func (rf *Raft) broadcastHeartbeats() {
+	for i := 0; i < len(rf.peers); i++ {
+		if i == rf.me {
+			continue
+		}
+
+		go func(server int) {
+			rf.mu.Lock()
+			if rf.state != Leader {
+				rf.mu.Unlock()
+				return
+			}
+
+			args := &AppendEntriesArgs{
+				Term:         rf.currentTerm,
+				LeaderId:     rf.me,
+				PrevLogIndex: 0,   // Placeholder for 3B
+				PrevLogTerm:  0,   // Placeholder for 3B
+				Entries:      nil, // Empty for heartbeat
+				LeaderCommit: 0,   // Placeholder for 3B
+			}
+			rf.mu.Unlock()
+
+			reply := &AppendEntriesReply{}
+			if rf.sendAppendEntries(server, args, reply) {
+				rf.mu.Lock()
+				defer rf.mu.Unlock()
+
+				if reply.Term > rf.currentTerm {
+					rf.currentTerm = reply.Term
+					rf.state = Follower
+					rf.votedFor = -1
+					return
+				}
+			}
+		}(i)
+	}
 }
