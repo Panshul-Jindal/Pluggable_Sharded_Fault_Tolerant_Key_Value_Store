@@ -240,7 +240,7 @@ func (rf *Raft) killed() bool {
 }
 
 func (rf *Raft) ticker() {
-	for rf.killed() == false {
+	for !rf.killed() {
 
 		// Your code here (3A)
 		// Check if a leader election should be started.
@@ -264,6 +264,8 @@ func (rf *Raft) ticker() {
 				LastLogTerm:  0, // Todo in 3B
 			}
 
+			votesReceived := 1
+
 			for i := 0; i < len(rf.peers); i++ {
 				if i == rf.me {
 					continue
@@ -271,6 +273,29 @@ func (rf *Raft) ticker() {
 
 				go func(server int) {
 					reply := &RequestVoteReply{}
+					if rf.sendRequestVote(server, args, reply) {
+						rf.mu.Lock()
+						defer rf.mu.Unlock()
+
+						if rf.currentTerm != args.Term {
+							return
+						}
+
+						if rf.currentTerm < reply.Term {
+							rf.currentTerm = reply.Term
+							rf.state = Follower
+							rf.votedFor = -1
+							return
+						}
+
+						if reply.VoteGranted {
+							votesReceived++
+							if rf.state == Candidate && votesReceived > len(rf.peers)/2 {
+								rf.state = Leader
+								// Todo: start sending heartbeats
+							}
+						}
+					}
 				}(i)
 			}
 		}
