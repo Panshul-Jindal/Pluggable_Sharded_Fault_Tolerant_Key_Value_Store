@@ -169,6 +169,11 @@ type AppendEntriesArgs struct {
 type AppendEntriesReply struct {
 	Term    int
 	Success bool
+
+	//Optimization fields
+	ConflictIndex int
+    ConflictTerm  int
+
 }
 
 // example RequestVote RPC handler.
@@ -441,8 +446,51 @@ func (rf *Raft) handleAppendEntriesReply(peerIdx int, args *AppendEntriesArgs, r
 	} else {
 		// Failed check (Log Inconsistency)
 		// Decrement nextIndex and retry later
-		rf.nextIndex[peerIdx]--
-		// Note: There is an optimization here to backup faster, but decrementing by 1 works for correctness.
+		// rf.nextIndex[peerIdx]--
+		// // Note: There is an optimization here to backup faster, but decrementing by 1 works for correctness.
+
+		if reply.ConflictTerm == -1 {
+            // Follower's log was too short.
+            // Set nextIndex to the length of the follower's log.
+            rf.nextIndex[peerIdx] = reply.ConflictIndex
+        }else {
+            // Term mismatch. Check if we have that term.
+            // Goal: Find the last entry in our log with that ConflictTerm.
+            
+            found := false
+            lastEntryWithTerm := -1
+            
+            for i := len(rf.log) - 1; i >= 0; i-- {
+                if rf.log[i].Term == reply.ConflictTerm {
+                    lastEntryWithTerm = i
+                    found = true
+                    break
+                }
+            }
+            
+            if found {
+                // If we have the term, try to match just after it
+                rf.nextIndex[peerIdx] = lastEntryWithTerm + 1
+            } else {
+                // We don't have this term at all.
+                // Reset to the follower's first index for that term.
+				// The follower has a term we've never seen (or deleted).
+                // We must overwrite it. Back up to the start of their conflict.
+                rf.nextIndex[peerIdx] = reply.ConflictIndex
+            }
+        }
+
+
+        
+        // Safety clamp: ensure we don't go out of bounds (shouldn't happen with above logic but good practice)
+        if rf.nextIndex[peerIdx] < 1 {
+            rf.nextIndex[peerIdx] = 1
+        }
+
+
+
+
+
 		if rf.nextIndex[peerIdx] < 1 {
 			rf.nextIndex[peerIdx] = 1
 		}
@@ -541,12 +589,27 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	if len(rf.log) <= args.PrevLogIndex {
 		reply.Success = false
 		reply.Term = rf.currentTerm
+		// Optimization: Tell leader to try next at the end of my log
+        reply.ConflictIndex = len(rf.log)
+        reply.ConflictTerm = -1 // No term conflict, just length
 		return
 	}
 	// Case B: I have the index, but the term doesn't match
 	if rf.log[args.PrevLogIndex].Term != args.PrevLogTerm {
 		reply.Success = false
 		reply.Term = rf.currentTerm
+
+		// 1. Remember the conflicting term
+        reply.ConflictTerm = rf.log[args.PrevLogIndex].Term
+		// 2. Scan backwards to find the first index of this conflicting term
+        idx := args.PrevLogIndex
+        for idx > 0 && rf.log[idx].Term == reply.ConflictTerm {
+            idx--
+        }
+
+		// idx points to the entry *before* the conflict range, so add 1
+        reply.ConflictIndex = idx + 1
+
 		return
 	}
 
