@@ -69,6 +69,8 @@ type Raft struct {
 	logger *log.Logger
 
 	electionTimeout time.Duration
+	lastBroadcast []time.Time
+
 	
 }
 
@@ -455,7 +457,7 @@ func (rf *Raft) broadcastHeartbeats() {
 	term := rf.currentTerm
 	commitIndex := rf.commitIndex
 	rf.DebugState("At the start of broadcast")
-
+    now := time.Now()
 	for peerIdx := range rf.peers {
 		if peerIdx == rf.me {
 			continue
@@ -474,9 +476,15 @@ func (rf *Raft) broadcastHeartbeats() {
         // Only send if:
         // 1. There are new entries to send (nextIdx < len(log))
         // 2. Or follower's commitIndex might be stale (needs commit update)
-        // if nextIdx >= len(rf.log) && rf.matchIndex[peerIdx] >= commitIndex {
-        //     continue  // Follower is fully caught up, skip this RPC
-        // }
+         // ⛔ Skip ONLY IF:
+        // 1️⃣ follower is caught up
+        // 2️⃣ follower already knows commit index
+        // 3️⃣ we sent heartbeat recently (< 90ms ago)
+        if nextIdx >= len(rf.log) &&
+           rf.matchIndex[peerIdx] >= commitIndex &&
+           now.Sub(rf.lastBroadcast[peerIdx]) < 90*time.Millisecond {
+            continue
+        }
 
 
 		// Safety check: If nextIdx is invalid, reset it to a safe value///TODO Isn't needed explicitly
@@ -670,6 +678,7 @@ func (rf *Raft) handleAppendEntriesReply(peerIdx int, args *AppendEntriesArgs, r
 	}
 
 	if reply.Success {
+		rf.lastBroadcast[peerIdx] = time.Now() // record successful RPC
 		// Update matchIndex and nextIndex
 		newMatchIndex := args.PrevLogIndex + len(args.Entries)
 		if newMatchIndex > rf.matchIndex[peerIdx] {
@@ -839,6 +848,7 @@ func Make(peers []*labrpc.ClientEnd, me int,
 
 	// Create dedicated log file per server:
     rf.logger = createServerLogger(me)
+	rf.lastBroadcast = make([]time.Time, len(peers))
 
 	// --- FIX START ---
 	// Seed the random number generator with a unique value based on time and ID
