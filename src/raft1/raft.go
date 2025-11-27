@@ -346,10 +346,25 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	// 4. Optimization: Trigger a broadcast immediately so we don't wait 100ms
 	// You can call rf.broadcastHeartbeats() here if you want faster tests.
 	// Trigger broadcast immediately to speed up consensus
-   go rf.broadcastHeartbeats()
+//    go rf.broadcastHeartbeats()
 	return index, term, true //return index, term, isLeader
 }
 
+func (rf *Raft) becomeLeader() {
+	if rf.state == StateLeader {
+		return
+	}
+	rf.state = StateLeader
+
+	// Initialize Leader State
+	for i := range rf.peers {
+		rf.nextIndex[i] = len(rf.log)
+		rf.matchIndex[i] = 0
+	}
+
+	// ZAB Synchronization: Broadcast immediately
+	go rf.broadcastHeartbeats()
+}
 
 func (rf *Raft) startElection() {
 	// Note: rf.mu is already Locked by the caller (ticker)
@@ -362,8 +377,6 @@ func (rf *Raft) startElection() {
 
 	term := rf.currentTerm
 	votesReceived := 1 // We vote for ourselves
-
-	// Inside startElection...
 	lastLogIndex := len(rf.log) - 1
 	lastLogTerm := rf.log[lastLogIndex].Term
 
@@ -391,7 +404,7 @@ func (rf *Raft) startElection() {
 
 				// Check if our state changed while waiting for reply
 				//Why? Because while we were waiting for the network, we might have received a heartbeat from a valid leader and turned back into a Follower
-				if rf.currentTerm != term || rf.state != StateCandidate {
+				if rf.currentTerm != args.Term || rf.state != StateCandidate {
 					return
 				}
 
@@ -400,7 +413,6 @@ func (rf *Raft) startElection() {
 					rf.currentTerm = reply.Term
 					rf.state = StateFollower
 					rf.votedFor = -1
-					rf.resetElectionTimer() 
 					rf.persist()
 					return
 				}
@@ -410,40 +422,9 @@ func (rf *Raft) startElection() {
 					// Check for Majority
 					if votesReceived > len(rf.peers)/2 {
 							// We won!
-						// Fix: Only transition if we aren't already Leader
-                        // This prevents resetting nextIndex/matchIndex repeatedly
-						if rf.state != StateLeader {
-                            rf.state = StateLeader
-                            
-                            // Initialize indexes
-							lastIndex := len(rf.log) - 1
-                            for i := range rf.peers {
-                                rf.nextIndex[i] = len(rf.log)
-                                rf.matchIndex[i] = 0
-                            }	
-							rf.matchIndex[rf.me] = lastIndex   // ⬅ Important!
-						rf.persist()
-						rf.resetElectionTimer() 
-                            
-                        rf.broadcastHeartbeats()
-					
-                        }
-						// // We won!
-						// rf.state = StateLeader
-
-						// // --- ADD THIS BLOCK ---
-						// // Reinitialize Volatile Leader State
-						// lastIndex := len(rf.log) - 1
-						// for i := range rf.peers {
-						// 	rf.nextIndex[i] = len(rf.log) // Initialize to leader's log length
-						// 	rf.matchIndex[i] = 0          // Safely start at 0
-						// }
-						// rf.matchIndex[rf.me] = lastIndex
-
-						// // Trigger heartbeats immediately (Part 3B)
-						// rf.persist()
-						// rf.resetElectionTimer() = time.Now()
-						// rf.broadcastHeartbeats()
+						
+						rf.becomeLeader()
+			
 					}
 				}
 			}
@@ -452,8 +433,12 @@ func (rf *Raft) startElection() {
 	rf.DebugState("At the end of startElection")
 }
 
+
+
 func (rf *Raft) broadcastHeartbeats() {
-	// Note: rf.mu is Locked by caller (ticker)
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
+
 	term := rf.currentTerm
 	commitIndex := rf.commitIndex
 	rf.DebugState("At the start of broadcast")
@@ -470,6 +455,11 @@ func (rf *Raft) broadcastHeartbeats() {
 
 		nextIdx := rf.nextIndex[peerIdx]
 
+		// Safety check: If nextIdx is invalid, reset it to a safe value///TODO Isn't needed explicitly
+		// Safety: never allow nextIdx > len(log)
+		if nextIdx < 1 {
+			nextIdx = 1
+		}
 
 
 		//✅ OPTIMIZATION: Skip if follower is caught up AND we're just sending heartbeat
@@ -487,36 +477,20 @@ func (rf *Raft) broadcastHeartbeats() {
         }
 
 
-		// Safety check: If nextIdx is invalid, reset it to a safe value///TODO Isn't needed explicitly
-		// Safety: never allow nextIdx > len(log)
-
-		if nextIdx > len(rf.log) {
-			nextIdx = len(rf.log)
-		}
-
-		// PrevLogIndex = entry **just before** nextIdx
-		prevLogIndex := nextIdx - 1
-
-		// Safety clamps (rare)
-		// Safety check: prevent out of bounds if nextIndex is somehow wrong
-		if prevLogIndex < 0 {
-			prevLogIndex = 0
-		}
-		if prevLogIndex >= len(rf.log) {
-			prevLogIndex = len(rf.log) - 1
-		}
-
-		// This MUST be valid; we just made sure of that!
-		prevLogTerm := rf.log[prevLogIndex].Term
 
 		// Grab the entries to send (from nextIdx to end)
 		// Make a copy to avoid race conditions if log changes
 
 		// Send entries starting FROM nextIdx till end
-
-		entriesToSend := make([]LogEntry, len(rf.log)-nextIdx)
-		copy(entriesToSend, rf.log[nextIdx:])
-
+		// Prepare Entries
+		var entriesToSend []LogEntry
+		if nextIdx < len(rf.log) {
+			entriesToSend = make([]LogEntry, len(rf.log)-nextIdx)
+			copy(entriesToSend, rf.log[nextIdx:])
+		}
+		
+		prevLogIndex := nextIdx - 1
+		prevLogTerm := rf.log[prevLogIndex].Term
 		// Now send AppendEntries RPC
 		go func(idx int, args AppendEntriesArgs) { // Launch goroutine for each peer, sending AppendEntries in parallel
 			reply := AppendEntriesReply{}
@@ -548,6 +522,8 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	defer rf.mu.Unlock()
 	rf.DebugState("At the start of AppendEntries")
 	// 1. Standard Term Check   Reply false if term < currentTerm (Section 5.1)
+
+	
 	if args.Term < rf.currentTerm {
 		reply.Success = false
 		reply.Term = rf.currentTerm
@@ -561,12 +537,8 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
         rf.votedFor = -1
         rf.state = StateFollower
         rf.persist() // <--- Only persist here (State changed)
-		rf.resetElectionTimer()
-    } else if rf.state == StateCandidate {
-        // If term == currentTerm, we recognize the leader
-        rf.state = StateFollower
-		rf.resetElectionTimer()
-    }
+    } 
+	rf.resetElectionTimer()
 
 	// 3. Reset Election Timer
     // (If you implemented the "Stable Randomness" fix, call that here!)
@@ -673,7 +645,6 @@ func (rf *Raft) handleAppendEntriesReply(peerIdx int, args *AppendEntriesArgs, r
 		rf.state = StateFollower
 		rf.votedFor = -1
 		rf.persist()
-		rf.resetElectionTimer() 
 		return
 	}
 
@@ -683,8 +654,9 @@ func (rf *Raft) handleAppendEntriesReply(peerIdx int, args *AppendEntriesArgs, r
 		newMatchIndex := args.PrevLogIndex + len(args.Entries)
 		if newMatchIndex > rf.matchIndex[peerIdx] {
 			rf.matchIndex[peerIdx] = newMatchIndex
+			rf.nextIndex[peerIdx] = rf.matchIndex[peerIdx] + 1
+
 		}
-		rf.nextIndex[peerIdx] = rf.matchIndex[peerIdx] + 1
 
 		// CHECK FOR COMMIT (Figure 1: Rules for Leader)
 		// If there exists an N such that N > commitIndex, a majority of matchIndex[i] >= N,
@@ -758,7 +730,7 @@ func (rf *Raft) resetElectionTimer() {
     rf.lastHeartbeat = time.Now()
 
     // Randomized ONCE per term
-    ms := 500 + (rand.Int63() % 500)
+    ms := 350 + (rand.Int63() % 350)
     rf.electionTimeout = time.Duration(ms) * time.Millisecond
 }
 func (rf *Raft) ticker() {
@@ -769,14 +741,15 @@ func (rf *Raft) ticker() {
 
         if rf.state == StateLeader {
             if time.Since(rf.lastHeartbeat) >= 100*time.Millisecond {
+				rf.mu.Unlock()
                 rf.broadcastHeartbeats()
+				rf.mu.Lock()
                 rf.lastHeartbeat = time.Now()  // ✅ Just update time, don't regenerate timeout
             }
         } else {
             // Use previously generated timeout
             if time.Since(rf.lastHeartbeat) >= rf.electionTimeout {
                 rf.startElection()
-                rf.resetElectionTimer() // Pick new timeout only after starting election
             }
         }
 
@@ -848,14 +821,7 @@ func Make(peers []*labrpc.ClientEnd, me int,
 
 	// Create dedicated log file per server:
     rf.logger = createServerLogger(me)
-	rf.lastBroadcast = make([]time.Time, len(peers))
 
-	// --- FIX START ---
-	// Seed the random number generator with a unique value based on time and ID
-	// Note: In newer Go versions (1.20+), global rand is auto-seeded,
-	// but explicit seeding is safer for these labs.
-	seed := int64(me) + time.Now().UnixNano()
-	rand.Seed(seed)
 
 	// Your initialization code here (3A, 3B, 3C).
 	// Initialize state
@@ -871,7 +837,11 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	// Initialize leader state (even if not leader, good to have memory ready)
 	rf.nextIndex = make([]int, len(peers))
 	rf.matchIndex = make([]int, len(peers))
+	rf.lastBroadcast = make([]time.Time, len(peers))
 
+	for i := range rf.nextIndex {
+		rf.nextIndex[i] = 1
+	}
 	// initialize from state persisted before a crash
 	rf.readPersist(persister.ReadRaftState())
 

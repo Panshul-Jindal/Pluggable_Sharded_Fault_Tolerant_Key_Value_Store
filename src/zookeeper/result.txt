@@ -1,0 +1,397 @@
+Test (3B): basic agreement (reliable network)...
+ZK0 2025/11/27 20:28:23.022116 Server 0: Starting election, epoch=1, zxid=(0,0)
+ZK1 2025/11/27 20:28:23.022128 Server 1: Starting election, epoch=1, zxid=(0,0)
+ZK2 2025/11/27 20:28:23.022156 Server 2: Starting election, epoch=1, zxid=(0,0)
+ZK0 2025/11/27 20:28:23.022346 Server 0: Election finalized, leader=2, epoch=1
+ZK1 2025/11/27 20:28:23.022347 Server 1: Election finalized, leader=2, epoch=1
+ZK2 2025/11/27 20:28:23.022446 Server 2: Election finalized, leader=2, epoch=1
+ZK2 2025/11/27 20:28:23.022453 Server 2: Starting as leader
+ZK2 2025/11/27 20:28:23.023012 Server 2: Now leading with epoch 1
+  ... Passed --  time  0.3s #peers 3 #RPCs    24 #Ops    0
+ZK0 2025/11/27 20:28:23.340487 Server 0: Starting election, epoch=1, zxid=(0,0)
+Test (3B): RPC byte count (reliable network)...
+ZK1 2025/11/27 20:28:23.340616 Server 1: Starting election, epoch=1, zxid=(0,0)
+ZK2 2025/11/27 20:28:23.340779 Server 2: Starting election, epoch=1, zxid=(0,0)
+ZK1 2025/11/27 20:28:23.341222 Server 1: Election finalized, leader=2, epoch=1
+ZK0 2025/11/27 20:28:23.341351 Server 0: Election finalized, leader=1, epoch=1
+ZK2 2025/11/27 20:28:23.341822 Server 2: Election finalized, leader=1, epoch=1
+ZK0 2025/11/27 20:28:24.446464 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 20:28:24.446653 Server 0: Starting election, epoch=2, zxid=(0,0)
+ZK2 2025/11/27 20:28:24.446999 Server 2: Stepping down from 1 to Looking due to epoch 2
+ZK1 2025/11/27 20:28:24.447050 Server 1: Stepping down from 1 to Looking due to epoch 2
+ZK0 2025/11/27 20:28:24.447239 Server 0: Election finalized, leader=2, epoch=2
+ZK1 2025/11/27 20:28:24.447643 Server 1: Election finalized, leader=2, epoch=2
+ZK2 2025/11/27 20:28:24.449268 Server 2: Election finalized, leader=2, epoch=2
+ZK2 2025/11/27 20:28:24.449312 Server 2: Starting as leader
+ZK2 2025/11/27 20:28:24.450706 Server 2: Now leading with epoch 2
+  ... Passed --  time  2.2s #peers 3 #RPCs    62 #Ops    0
+ZK0 2025/11/27 20:28:25.569556 Server 0: Starting election, epoch=1, zxid=(0,0)
+Test (3B): test progressive failure of followers (reliable network)...
+ZK1 2025/11/27 20:28:25.569649 Server 1: Starting election, epoch=1, zxid=(0,0)
+ZK2 2025/11/27 20:28:25.569694 Server 2: Starting election, epoch=1, zxid=(0,0)
+ZK1 2025/11/27 20:28:25.570007 Server 1: Election finalized, leader=2, epoch=1
+ZK0 2025/11/27 20:28:25.570044 Server 0: Election finalized, leader=2, epoch=1
+ZK2 2025/11/27 20:28:25.570323 Server 2: Election finalized, leader=2, epoch=1
+ZK2 2025/11/27 20:28:25.570356 Server 2: Starting as leader
+ZK2 2025/11/27 20:28:25.571368 Server 2: Now leading with epoch 1
+ZK0 2025/11/27 20:28:27.046651 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 20:28:27.046827 Server 0: Starting election, epoch=2, zxid=(1,1)
+ZK1 2025/11/27 20:28:28.193075 Server 1: No heartbeat, re-entering election
+ZK1 2025/11/27 20:28:28.193408 Server 1: Starting election, epoch=2, zxid=(1,3)
+  ... Passed --  time  4.3s #peers 3 #RPCs   196 #Ops    0
+ZK0 2025/11/27 20:28:29.828088 Server 0: Starting election, epoch=1, zxid=(0,0)
+Test (3B): test failure of leaders (reliable network)...
+ZK1 2025/11/27 20:28:29.828192 Server 1: Starting election, epoch=1, zxid=(0,0)
+ZK2 2025/11/27 20:28:29.828296 Server 2: Starting election, epoch=1, zxid=(0,0)
+ZK0 2025/11/27 20:28:29.828749 Server 0: Election finalized, leader=2, epoch=1
+ZK1 2025/11/27 20:28:29.828854 Server 1: Election finalized, leader=2, epoch=1
+ZK2 2025/11/27 20:28:29.829220 Server 2: Election finalized, leader=2, epoch=1
+ZK2 2025/11/27 20:28:29.829246 Server 2: Starting as leader
+ZK2 2025/11/27 20:28:29.831571 Server 2: Now leading with epoch 1
+ZK0 2025/11/27 20:28:30.934538 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 20:28:30.934640 Server 0: Starting election, epoch=2, zxid=(1,1)
+ZK1 2025/11/27 20:28:30.934864 Server 1: Stepping down from 1 to Looking due to epoch 2
+ZK0 2025/11/27 20:28:30.935079 Server 0: Election finalized, leader=1, epoch=2
+ZK1 2025/11/27 20:28:31.035494 Server 1: Election finalized, leader=1, epoch=2
+ZK1 2025/11/27 20:28:31.035561 Server 1: Starting as leader
+ZK0 2025/11/27 20:28:31.907614 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 20:28:31.907847 Server 0: Starting election, epoch=3, zxid=(1,1)
+ZK1 2025/11/27 20:28:31.908599 Server 1: Stepping down from 2 to Looking due to epoch 3
+ZK1 2025/11/27 20:28:31.908801 Server 1: Election finalized, leader=0, epoch=3
+ZK0 2025/11/27 20:28:31.941212 Server 0: Election finalized, leader=0, epoch=3
+ZK0 2025/11/27 20:28:31.941298 Server 0: Starting as leader
+ZK1 2025/11/27 20:28:33.729160 Server 1: No heartbeat, re-entering election
+ZK1 2025/11/27 20:28:33.729259 Server 1: Starting election, epoch=4, zxid=(1,1)
+ZK0 2025/11/27 20:28:33.729479 Server 0: Stepping down from 2 to Looking due to epoch 4
+ZK0 2025/11/27 20:28:33.729504 Server 0: Election finalized, leader=1, epoch=4
+ZK1 2025/11/27 20:28:33.753176 Server 1: Election finalized, leader=1, epoch=4
+ZK1 2025/11/27 20:28:33.753278 Server 1: Starting as leader
+ZK0 2025/11/27 20:28:35.212537 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 20:28:35.212855 Server 0: Starting election, epoch=5, zxid=(1,1)
+ZK1 2025/11/27 20:28:35.213612 Server 1: Stepping down from 2 to Looking due to epoch 5
+ZK1 2025/11/27 20:28:35.213766 Server 1: Election finalized, leader=0, epoch=5
+ZK0 2025/11/27 20:28:35.262949 Server 0: Election finalized, leader=0, epoch=5
+ZK0 2025/11/27 20:28:35.263092 Server 0: Starting as leader
+ZK1 2025/11/27 20:28:36.070040 Server 1: No heartbeat, re-entering election
+ZK1 2025/11/27 20:28:36.070310 Server 1: Starting election, epoch=6, zxid=(1,1)
+ZK0 2025/11/27 20:28:36.070855 Server 0: Stepping down from 2 to Looking due to epoch 6
+ZK0 2025/11/27 20:28:36.071030 Server 0: Election finalized, leader=1, epoch=6
+ZK1 2025/11/27 20:28:36.168283 Server 1: Election finalized, leader=1, epoch=6
+ZK1 2025/11/27 20:28:36.168310 Server 1: Starting as leader
+ZK0 2025/11/27 20:28:37.713783 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 20:28:37.714099 Server 0: Starting election, epoch=7, zxid=(1,1)
+ZK1 2025/11/27 20:28:37.714889 Server 1: Stepping down from 2 to Looking due to epoch 7
+ZK1 2025/11/27 20:28:37.715063 Server 1: Election finalized, leader=0, epoch=7
+ZK0 2025/11/27 20:28:37.778827 Server 0: Election finalized, leader=0, epoch=7
+ZK0 2025/11/27 20:28:37.778907 Server 0: Starting as leader
+ZK1 2025/11/27 20:28:39.151571 Server 1: No heartbeat, re-entering election
+ZK1 2025/11/27 20:28:39.151683 Server 1: Starting election, epoch=8, zxid=(1,1)
+ZK0 2025/11/27 20:28:39.151867 Server 0: Stepping down from 2 to Looking due to epoch 8
+ZK0 2025/11/27 20:28:39.151891 Server 0: Election finalized, leader=1, epoch=8
+ZK1 2025/11/27 20:28:39.185829 Server 1: Election finalized, leader=1, epoch=8
+ZK1 2025/11/27 20:28:39.185887 Server 1: Starting as leader
+Fatal: one(102) failed to reach agreement
+        /home/panshul/Dev/projects/6.5840/src/zookeeper/test.go:283
+        /home/panshul/Dev/projects/6.5840/src/zookeeper/zookeeper_test.go:250
+info: wrote visualization to /tmp/porcupine-1159234007.html
+--- FAIL: TestLeaderFailure3B (10.63s)
+ZK0 2025/11/27 20:28:40.458657 Server 0: Starting election, epoch=1, zxid=(0,0)
+ZK2 2025/11/27 20:28:40.458677 Server 2: Starting election, epoch=1, zxid=(0,0)
+Test (3B): agreement after follower reconnects (reliable network)...
+ZK1 2025/11/27 20:28:40.459575 Server 1: Starting election, epoch=1, zxid=(0,0)
+ZK1 2025/11/27 20:28:40.460411 Server 1: Election finalized, leader=2, epoch=1
+ZK0 2025/11/27 20:28:40.460551 Server 0: Election finalized, leader=1, epoch=1
+ZK2 2025/11/27 20:28:40.460850 Server 2: Election finalized, leader=1, epoch=1
+ZK1 2025/11/27 20:28:41.726576 Server 1: No heartbeat, re-entering election
+ZK1 2025/11/27 20:28:41.726885 Server 1: Starting election, epoch=2, zxid=(0,0)
+ZK2 2025/11/27 20:28:41.727369 Server 2: Stepping down from 1 to Looking due to epoch 2
+ZK1 2025/11/27 20:28:41.727678 Server 1: Election finalized, leader=2, epoch=2
+ZK0 2025/11/27 20:28:41.727735 Server 0: Stepping down from 1 to Looking due to epoch 2
+ZK0 2025/11/27 20:28:41.727912 Server 0: Election finalized, leader=1, epoch=2
+ZK2 2025/11/27 20:28:41.767283 Server 2: Election finalized, leader=2, epoch=2
+ZK2 2025/11/27 20:28:41.767405 Server 2: Starting as leader
+ZK2 2025/11/27 20:28:41.769493 Server 2: Now leading with epoch 2
+ZK0 2025/11/27 20:28:43.227044 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 20:28:43.227431 Server 0: Starting election, epoch=3, zxid=(2,1)
+ZK2 2025/11/27 20:28:43.779023 Server 2: Stepping down from 2 to Looking due to epoch 3
+ZK1 2025/11/27 20:28:43.779154 Server 1: Stepping down from 1 to Looking due to epoch 3
+ZK0 2025/11/27 20:28:43.779351 Server 0: Election finalized, leader=2, epoch=3
+ZK1 2025/11/27 20:28:43.879212 Server 1: Election finalized, leader=2, epoch=3
+ZK2 2025/11/27 20:28:43.879333 Server 2: Election finalized, leader=2, epoch=3
+ZK2 2025/11/27 20:28:43.879342 Server 2: Starting as leader
+ZK2 2025/11/27 20:28:43.879722 Server 2: Now leading with epoch 3
+Fatal: committed values at index 1 do not match (101 != 107)
+        /home/panshul/Dev/projects/6.5840/src/zookeeper/test.go:199
+        /home/panshul/Dev/projects/6.5840/src/zookeeper/test.go:259
+        /home/panshul/Dev/projects/6.5840/src/zookeeper/zookeeper_test.go:304
+info: wrote visualization to /tmp/porcupine-4139561264.html
+--- FAIL: TestFailAgree3B (4.55s)
+ZK0 2025/11/27 20:28:45.002863 Server 0: Starting election, epoch=1, zxid=(0,0)
+Test (3B): no agreement if too many followers disconnect (reliable network)...
+ZK1 2025/11/27 20:28:45.002897 Server 1: Starting election, epoch=1, zxid=(0,0)
+ZK2 2025/11/27 20:28:45.002903 Server 2: Starting election, epoch=1, zxid=(0,0)
+ZK4 2025/11/27 20:28:45.002908 Server 4: Starting election, epoch=1, zxid=(0,0)
+ZK1 2025/11/27 20:28:45.003126 Server 1: Election finalized, leader=4, epoch=1
+ZK0 2025/11/27 20:28:45.003126 Server 0: Election finalized, leader=4, epoch=1
+ZK2 2025/11/27 20:28:45.003199 Server 2: Election finalized, leader=4, epoch=1
+ZK3 2025/11/27 20:28:45.002899 Server 3: Starting election, epoch=1, zxid=(0,0)
+ZK4 2025/11/27 20:28:45.003058 Server 4: Election finalized, leader=4, epoch=1
+ZK3 2025/11/27 20:28:45.003341 Server 3: Election finalized, leader=4, epoch=1
+ZK4 2025/11/27 20:28:45.003440 Server 4: Starting as leader
+ZK4 2025/11/27 20:28:45.003755 Server 4: Now leading with epoch 1
+ZK1 2025/11/27 20:28:45.451590 Server 1: Synchronization failed
+ZK1 2025/11/27 20:28:45.451896 Server 1: Starting election, epoch=9, zxid=(1,1)
+ZK2 2025/11/27 20:28:46.043360 Server 2: No heartbeat, re-entering election
+ZK2 2025/11/27 20:28:46.043698 Server 2: Starting election, epoch=2, zxid=(1,1)
+ZK1 2025/11/27 20:28:46.192097 Server 1: No heartbeat, re-entering election
+ZK1 2025/11/27 20:28:46.192392 Server 1: Starting election, epoch=2, zxid=(1,1)
+ZK0 2025/11/27 20:28:46.529198 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 20:28:46.529386 Server 0: Starting election, epoch=2, zxid=(1,1)
+ZK3 2025/11/27 20:28:46.553073 Server 3: No heartbeat, re-entering election
+ZK3 2025/11/27 20:28:46.553405 Server 3: Starting election, epoch=2, zxid=(1,2)
+ZK4 2025/11/27 20:28:46.553874 Server 4: Stepping down from 2 to Looking due to epoch 2
+ZK4 2025/11/27 20:28:46.601290 Server 4: Election timeout in LOOKING, restarting election
+ZK4 2025/11/27 20:28:46.601561 Server 4: Starting election, epoch=3, zxid=(1,2)
+ZK3 2025/11/27 20:28:46.602108 Server 3: Stepping down from 0 to Looking due to epoch 3
+ZK0 2025/11/27 20:28:47.717900 Server 0: Stepping down from 0 to Looking due to epoch 3
+ZK0 2025/11/27 20:28:47.718033 Server 0: Election finalized, leader=4, epoch=3
+ZK3 2025/11/27 20:28:47.718095 Server 3: Election finalized, leader=4, epoch=3
+ZK1 2025/11/27 20:28:47.718106 Server 1: Stepping down from 0 to Looking due to epoch 3
+ZK1 2025/11/27 20:28:47.718138 Server 1: Election finalized, leader=4, epoch=3
+ZK2 2025/11/27 20:28:47.718167 Server 2: Stepping down from 0 to Looking due to epoch 3
+ZK2 2025/11/27 20:28:47.718190 Server 2: Election finalized, leader=4, epoch=3
+ZK4 2025/11/27 20:28:47.718222 Server 4: Election finalized, leader=4, epoch=3
+ZK4 2025/11/27 20:28:47.718232 Server 4: Starting as leader
+ZK4 2025/11/27 20:28:47.718630 Server 4: Now leading with epoch 3
+info: wrote visualization to /tmp/porcupine-2233145142.html
+--- FAIL: TestFailNoAgree3B (3.17s)
+    zookeeper_test.go:353: unexpected index 1
+Test (3B): concurrent Start()s (reliable network)...
+ZK0 2025/11/27 20:28:48.169745 Server 0: Starting election, epoch=1, zxid=(0,0)
+ZK2 2025/11/27 20:28:48.169872 Server 2: Starting election, epoch=1, zxid=(0,0)
+ZK1 2025/11/27 20:28:48.170038 Server 1: Starting election, epoch=1, zxid=(0,0)
+ZK1 2025/11/27 20:28:48.170334 Server 1: Election finalized, leader=2, epoch=1
+ZK0 2025/11/27 20:28:48.170561 Server 0: Election finalized, leader=2, epoch=1
+ZK2 2025/11/27 20:28:48.170975 Server 2: Election finalized, leader=2, epoch=1
+ZK2 2025/11/27 20:28:48.171004 Server 2: Starting as leader
+ZK2 2025/11/27 20:28:48.172677 Server 2: Now leading with epoch 1
+ZK1 2025/11/27 20:28:49.634242 Server 1: No heartbeat, re-entering election
+ZK1 2025/11/27 20:28:49.634570 Server 1: Starting election, epoch=2, zxid=(1,4)
+ZK2 2025/11/27 20:28:49.635089 Server 2: Stepping down from 2 to Looking due to epoch 2
+ZK1 2025/11/27 20:28:49.635437 Server 1: Election finalized, leader=2, epoch=2
+ZK0 2025/11/27 20:28:49.635550 Server 0: Stepping down from 1 to Looking due to epoch 2
+ZK0 2025/11/27 20:28:49.635712 Server 0: Election finalized, leader=1, epoch=2
+ZK2 2025/11/27 20:28:49.676413 Server 2: Election finalized, leader=1, epoch=2
+ZK0 2025/11/27 20:28:50.825606 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 20:28:50.825810 Server 0: Starting election, epoch=3, zxid=(1,4)
+ZK2 2025/11/27 20:28:50.826120 Server 2: Stepping down from 1 to Looking due to epoch 3
+ZK1 2025/11/27 20:28:50.826267 Server 1: Stepping down from 1 to Looking due to epoch 3
+ZK0 2025/11/27 20:28:50.826317 Server 0: Election finalized, leader=2, epoch=3
+ZK1 2025/11/27 20:28:50.883885 Server 1: Election finalized, leader=2, epoch=3
+ZK2 2025/11/27 20:28:50.884094 Server 2: Election finalized, leader=2, epoch=3
+ZK2 2025/11/27 20:28:50.884125 Server 2: Starting as leader
+ZK2 2025/11/27 20:28:50.885655 Server 2: Now leading with epoch 3
+ZK0 2025/11/27 20:28:51.688478 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 20:28:51.688596 Server 0: Starting election, epoch=4, zxid=(1,6)
+ZK2 2025/11/27 20:28:51.688752 Server 2: Stepping down from 2 to Looking due to epoch 4
+ZK1 2025/11/27 20:28:51.688804 Server 1: Stepping down from 1 to Looking due to epoch 4
+ZK0 2025/11/27 20:28:51.688894 Server 0: Election finalized, leader=2, epoch=4
+ZK1 2025/11/27 20:28:51.787063 Server 1: Election finalized, leader=2, epoch=4
+ZK2 2025/11/27 20:28:51.787183 Server 2: Election finalized, leader=2, epoch=4
+ZK2 2025/11/27 20:28:51.787207 Server 2: Starting as leader
+ZK2 2025/11/27 20:28:51.787752 Server 2: Now leading with epoch 4
+ZK0 2025/11/27 20:28:52.691835 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 20:28:52.692195 Server 0: Starting election, epoch=5, zxid=(1,6)
+ZK2 2025/11/27 20:28:52.692645 Server 2: Stepping down from 2 to Looking due to epoch 5
+ZK1 2025/11/27 20:28:52.692871 Server 1: Stepping down from 1 to Looking due to epoch 5
+ZK0 2025/11/27 20:28:52.692994 Server 0: Election finalized, leader=2, epoch=5
+ZK1 2025/11/27 20:28:52.774758 Server 1: Election timeout in LOOKING, restarting election
+ZK1 2025/11/27 20:28:52.774999 Server 1: Starting election, epoch=6, zxid=(1,6)
+ZK2 2025/11/27 20:28:52.775303 Server 2: Stepping down from 0 to Looking due to epoch 6
+ZK0 2025/11/27 20:28:52.775482 Server 0: Stepping down from 1 to Looking due to epoch 6
+ZK0 2025/11/27 20:28:52.775589 Server 0: Election finalized, leader=1, epoch=6
+ZK1 2025/11/27 20:28:52.775519 Server 1: Election finalized, leader=2, epoch=6
+ZK2 2025/11/27 20:28:52.792764 Server 2: Election finalized, leader=2, epoch=6
+ZK2 2025/11/27 20:28:52.792813 Server 2: Starting as leader
+ZK2 2025/11/27 20:28:52.793313 Server 2: Now leading with epoch 6
+  ... Passed --  time  5.4s #peers 3 #RPCs   152 #Ops    0
+ZK0 2025/11/27 20:28:53.603716 Server 0: Starting election, epoch=1, zxid=(0,0)
+Test (3B): rejoin of partitioned leader (reliable network)...
+ZK1 2025/11/27 20:28:53.603868 Server 1: Starting election, epoch=1, zxid=(0,0)
+ZK2 2025/11/27 20:28:53.603926 Server 2: Starting election, epoch=1, zxid=(0,0)
+ZK1 2025/11/27 20:28:53.604298 Server 1: Election finalized, leader=2, epoch=1
+ZK0 2025/11/27 20:28:53.604399 Server 0: Election finalized, leader=2, epoch=1
+ZK2 2025/11/27 20:28:53.604812 Server 2: Election finalized, leader=2, epoch=1
+ZK2 2025/11/27 20:28:53.604829 Server 2: Starting as leader
+ZK2 2025/11/27 20:28:53.606547 Server 2: Now leading with epoch 1
+ZK0 2025/11/27 20:28:55.075410 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 20:28:55.075713 Server 0: Starting election, epoch=2, zxid=(1,1)
+ZK1 2025/11/27 20:28:55.076682 Server 1: Stepping down from 1 to Looking due to epoch 2
+ZK0 2025/11/27 20:28:55.077485 Server 0: Election finalized, leader=1, epoch=2
+ZK1 2025/11/27 20:28:55.113687 Server 1: Election finalized, leader=1, epoch=2
+ZK1 2025/11/27 20:28:55.113768 Server 1: Starting as leader
+ZK0 2025/11/27 20:28:56.271706 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 20:28:56.271915 Server 0: Starting election, epoch=3, zxid=(1,1)
+ZK1 2025/11/27 20:28:56.272679 Server 1: Stepping down from 2 to Looking due to epoch 3
+ZK1 2025/11/27 20:28:56.272836 Server 1: Election finalized, leader=0, epoch=3
+ZK0 2025/11/27 20:28:56.323805 Server 0: Election finalized, leader=0, epoch=3
+ZK0 2025/11/27 20:28:56.323908 Server 0: Starting as leader
+ZK1 2025/11/27 20:28:57.666066 Server 1: No heartbeat, re-entering election
+ZK1 2025/11/27 20:28:57.666350 Server 1: Starting election, epoch=4, zxid=(1,1)
+ZK0 2025/11/27 20:28:57.667058 Server 0: Stepping down from 2 to Looking due to epoch 4
+ZK0 2025/11/27 20:28:57.667189 Server 0: Election finalized, leader=1, epoch=4
+ZK1 2025/11/27 20:28:57.733681 Server 1: Election finalized, leader=1, epoch=4
+ZK1 2025/11/27 20:28:57.733791 Server 1: Starting as leader
+ZK0 2025/11/27 20:28:58.602038 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 20:28:58.602433 Server 0: Starting election, epoch=5, zxid=(1,1)
+ZK1 2025/11/27 20:28:58.603029 Server 1: Stepping down from 2 to Looking due to epoch 5
+ZK1 2025/11/27 20:28:58.603109 Server 1: Election finalized, leader=0, epoch=5
+ZK0 2025/11/27 20:28:58.638026 Server 0: Election finalized, leader=0, epoch=5
+ZK0 2025/11/27 20:28:58.638126 Server 0: Starting as leader
+ZK1 2025/11/27 20:28:59.938773 Server 1: No heartbeat, re-entering election
+ZK1 2025/11/27 20:28:59.939115 Server 1: Starting election, epoch=6, zxid=(1,1)
+ZK0 2025/11/27 20:28:59.939715 Server 0: Stepping down from 2 to Looking due to epoch 6
+ZK0 2025/11/27 20:28:59.939799 Server 0: Election finalized, leader=1, epoch=6
+ZK1 2025/11/27 20:28:59.946203 Server 1: Election finalized, leader=1, epoch=6
+ZK1 2025/11/27 20:28:59.946307 Server 1: Starting as leader
+ZK0 2025/11/27 20:29:00.814801 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 20:29:00.815136 Server 0: Starting election, epoch=7, zxid=(1,1)
+ZK1 2025/11/27 20:29:00.815722 Server 1: Stepping down from 2 to Looking due to epoch 7
+ZK1 2025/11/27 20:29:00.815847 Server 1: Election finalized, leader=0, epoch=7
+ZK0 2025/11/27 20:29:00.851502 Server 0: Election finalized, leader=0, epoch=7
+ZK0 2025/11/27 20:29:00.851638 Server 0: Starting as leader
+ZK1 2025/11/27 20:29:01.691873 Server 1: No heartbeat, re-entering election
+ZK1 2025/11/27 20:29:01.692043 Server 1: Starting election, epoch=8, zxid=(1,1)
+ZK0 2025/11/27 20:29:01.693730 Server 0: Stepping down from 2 to Looking due to epoch 8
+ZK0 2025/11/27 20:29:01.693802 Server 0: Election finalized, leader=1, epoch=8
+ZK1 2025/11/27 20:29:01.756941 Server 1: Election finalized, leader=1, epoch=8
+ZK1 2025/11/27 20:29:01.757086 Server 1: Starting as leader
+ZK0 2025/11/27 20:29:03.515144 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 20:29:03.515449 Server 0: Starting election, epoch=9, zxid=(1,1)
+ZK1 2025/11/27 20:29:03.516438 Server 1: Stepping down from 2 to Looking due to epoch 9
+ZK1 2025/11/27 20:29:03.516690 Server 1: Election finalized, leader=0, epoch=9
+ZK0 2025/11/27 20:29:03.565776 Server 0: Election finalized, leader=0, epoch=9
+ZK0 2025/11/27 20:29:03.565833 Server 0: Starting as leader
+Fatal: one(103) failed to reach agreement
+        /home/panshul/Dev/projects/6.5840/src/zookeeper/test.go:283
+        /home/panshul/Dev/projects/6.5840/src/zookeeper/zookeeper_test.go:506
+info: wrote visualization to /tmp/porcupine-184421509.html
+--- FAIL: TestRejoin3B (10.64s)
+ZK0 2025/11/27 20:29:04.247535 Server 0: Starting election, epoch=1, zxid=(0,0)
+Test (3B): leader backs up quickly over incorrect follower logs (reliable network)...
+ZK1 2025/11/27 20:29:04.247615 Server 1: Starting election, epoch=1, zxid=(0,0)
+ZK2 2025/11/27 20:29:04.247735 Server 2: Starting election, epoch=1, zxid=(0,0)
+ZK4 2025/11/27 20:29:04.247813 Server 4: Starting election, epoch=1, zxid=(0,0)
+ZK3 2025/11/27 20:29:04.247749 Server 3: Starting election, epoch=1, zxid=(0,0)
+ZK4 2025/11/27 20:29:04.248527 Server 4: Election finalized, leader=4, epoch=1
+ZK0 2025/11/27 20:29:04.249029 Server 0: Election finalized, leader=4, epoch=1
+ZK1 2025/11/27 20:29:04.249292 Server 1: Election finalized, leader=4, epoch=1
+ZK2 2025/11/27 20:29:04.249577 Server 2: Election finalized, leader=4, epoch=1
+ZK3 2025/11/27 20:29:04.249706 Server 3: Election finalized, leader=4, epoch=1
+ZK4 2025/11/27 20:29:04.250669 Server 4: Starting as leader
+ZK4 2025/11/27 20:29:04.253737 Server 4: Now leading with epoch 1
+ZK0 2025/11/27 20:29:04.260157 Server 0: Synchronization failed
+ZK0 2025/11/27 20:29:04.260300 Server 0: Starting election, epoch=10, zxid=(1,1)
+ZK1 2025/11/27 20:29:05.494058 Server 1: No heartbeat, re-entering election
+ZK1 2025/11/27 20:29:05.494201 Server 1: Starting election, epoch=2, zxid=(1,1)
+ZK3 2025/11/27 20:29:05.494465 Server 3: Stepping down from 1 to Looking due to epoch 2
+ZK2 2025/11/27 20:29:05.494536 Server 2: Stepping down from 1 to Looking due to epoch 2
+ZK3 2025/11/27 20:29:05.495043 Server 3: Election finalized, leader=3, epoch=2
+ZK1 2025/11/27 20:29:05.495095 Server 1: Election finalized, leader=3, epoch=2
+ZK2 2025/11/27 20:29:05.495149 Server 2: Election finalized, leader=3, epoch=2
+ZK3 2025/11/27 20:29:05.495159 Server 3: Starting as leader
+ZK0 2025/11/27 20:29:06.344047 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 20:29:06.344419 Server 0: Starting election, epoch=2, zxid=(1,48)
+ZK2 2025/11/27 20:29:06.395500 Server 2: No heartbeat, re-entering election
+ZK2 2025/11/27 20:29:06.395803 Server 2: Starting election, epoch=3, zxid=(1,1)
+ZK3 2025/11/27 20:29:06.396406 Server 3: Stepping down from 2 to Looking due to epoch 3
+ZK1 2025/11/27 20:29:06.396516 Server 1: Stepping down from 1 to Looking due to epoch 3
+ZK3 2025/11/27 20:29:06.397033 Server 3: Election finalized, leader=2, epoch=3
+ZK1 2025/11/27 20:29:06.397126 Server 1: Election finalized, leader=2, epoch=3
+ZK2 2025/11/27 20:29:06.397276 Server 2: Election finalized, leader=2, epoch=3
+ZK2 2025/11/27 20:29:06.397408 Server 2: Starting as leader
+ZK3 2025/11/27 20:29:07.240775 Server 3: No heartbeat, re-entering election
+ZK3 2025/11/27 20:29:07.240864 Server 3: Starting election, epoch=4, zxid=(1,1)
+ZK2 2025/11/27 20:29:07.240976 Server 2: Stepping down from 2 to Looking due to epoch 4
+ZK1 2025/11/27 20:29:07.241015 Server 1: Stepping down from 1 to Looking due to epoch 4
+ZK1 2025/11/27 20:29:07.241069 Server 1: Election finalized, leader=3, epoch=4
+ZK2 2025/11/27 20:29:07.241103 Server 2: Election finalized, leader=3, epoch=4
+ZK3 2025/11/27 20:29:07.265563 Server 3: Election finalized, leader=3, epoch=4
+ZK3 2025/11/27 20:29:07.265642 Server 3: Starting as leader
+ZK2 2025/11/27 20:29:08.214439 Server 2: No heartbeat, re-entering election
+ZK2 2025/11/27 20:29:08.214853 Server 2: Starting election, epoch=5, zxid=(1,1)
+ZK3 2025/11/27 20:29:08.215452 Server 3: Stepping down from 2 to Looking due to epoch 5
+ZK1 2025/11/27 20:29:08.215575 Server 1: Stepping down from 1 to Looking due to epoch 5
+ZK1 2025/11/27 20:29:08.216061 Server 1: Election finalized, leader=2, epoch=5
+ZK3 2025/11/27 20:29:08.216310 Server 3: Election finalized, leader=2, epoch=5
+ZK2 2025/11/27 20:29:08.216357 Server 2: Election finalized, leader=2, epoch=5
+ZK2 2025/11/27 20:29:08.216476 Server 2: Starting as leader
+ZK3 2025/11/27 20:29:09.189172 Server 3: No heartbeat, re-entering election
+ZK3 2025/11/27 20:29:09.189458 Server 3: Starting election, epoch=6, zxid=(1,1)
+ZK2 2025/11/27 20:29:09.190021 Server 2: Stepping down from 2 to Looking due to epoch 6
+ZK1 2025/11/27 20:29:09.190499 Server 1: Stepping down from 1 to Looking due to epoch 6
+ZK1 2025/11/27 20:29:09.190675 Server 1: Election finalized, leader=3, epoch=6
+ZK2 2025/11/27 20:29:09.190943 Server 2: Election finalized, leader=3, epoch=6
+ZK3 2025/11/27 20:29:09.278645 Server 3: Election finalized, leader=3, epoch=6
+ZK3 2025/11/27 20:29:09.278691 Server 3: Starting as leader
+ZK2 2025/11/27 20:29:10.530300 Server 2: No heartbeat, re-entering election
+ZK2 2025/11/27 20:29:10.530555 Server 2: Starting election, epoch=7, zxid=(1,1)
+ZK3 2025/11/27 20:29:10.531072 Server 3: Stepping down from 2 to Looking due to epoch 7
+ZK1 2025/11/27 20:29:10.531175 Server 1: Stepping down from 1 to Looking due to epoch 7
+ZK2 2025/11/27 20:29:10.531788 Server 2: Election finalized, leader=2, epoch=7
+ZK1 2025/11/27 20:29:10.531780 Server 1: Election finalized, leader=2, epoch=7
+ZK3 2025/11/27 20:29:10.532033 Server 3: Election finalized, leader=2, epoch=7
+ZK2 2025/11/27 20:29:10.532024 Server 2: Starting as leader
+ZK1 2025/11/27 20:29:11.471756 Server 1: No heartbeat, re-entering election
+ZK1 2025/11/27 20:29:11.471847 Server 1: Starting election, epoch=8, zxid=(1,1)
+ZK2 2025/11/27 20:29:11.472326 Server 2: Stepping down from 2 to Looking due to epoch 8
+ZK3 2025/11/27 20:29:11.472431 Server 3: Stepping down from 1 to Looking due to epoch 8
+ZK1 2025/11/27 20:29:11.473602 Server 1: Election finalized, leader=3, epoch=8
+ZK2 2025/11/27 20:29:11.473644 Server 2: Election finalized, leader=3, epoch=8
+ZK3 2025/11/27 20:29:11.473643 Server 3: Election finalized, leader=3, epoch=8
+ZK3 2025/11/27 20:29:11.473666 Server 3: Starting as leader
+ZK2 2025/11/27 20:29:12.510189 Server 2: No heartbeat, re-entering election
+ZK2 2025/11/27 20:29:12.510611 Server 2: Starting election, epoch=9, zxid=(1,1)
+ZK3 2025/11/27 20:29:12.511246 Server 3: Stepping down from 2 to Looking due to epoch 9
+ZK1 2025/11/27 20:29:12.511558 Server 1: Stepping down from 1 to Looking due to epoch 9
+ZK1 2025/11/27 20:29:12.511830 Server 1: Election finalized, leader=2, epoch=9
+ZK3 2025/11/27 20:29:12.512052 Server 3: Election finalized, leader=2, epoch=9
+ZK2 2025/11/27 20:29:12.599558 Server 2: Election finalized, leader=2, epoch=9
+ZK2 2025/11/27 20:29:12.599608 Server 2: Starting as leader
+ZK3 2025/11/27 20:29:13.765452 Server 3: No heartbeat, re-entering election
+ZK3 2025/11/27 20:29:13.765771 Server 3: Starting election, epoch=10, zxid=(1,1)
+ZK2 2025/11/27 20:29:13.766446 Server 2: Stepping down from 2 to Looking due to epoch 10
+ZK1 2025/11/27 20:29:13.766665 Server 1: Stepping down from 1 to Looking due to epoch 10
+ZK1 2025/11/27 20:29:13.767056 Server 1: Election finalized, leader=3, epoch=10
+ZK2 2025/11/27 20:29:13.767296 Server 2: Election finalized, leader=3, epoch=10
+ZK3 2025/11/27 20:29:13.809168 Server 3: Election finalized, leader=3, epoch=10
+ZK3 2025/11/27 20:29:13.809260 Server 3: Starting as leader
+ZK2 2025/11/27 20:29:15.298014 Server 2: No heartbeat, re-entering election
+ZK2 2025/11/27 20:29:15.298517 Server 2: Starting election, epoch=11, zxid=(1,1)
+ZK1 2025/11/27 20:29:15.299290 Server 1: Stepping down from 1 to Looking due to epoch 11
+ZK3 2025/11/27 20:29:15.299558 Server 3: Stepping down from 2 to Looking due to epoch 11
+ZK3 2025/11/27 20:29:15.300199 Server 3: Election finalized, leader=2, epoch=11
+ZK2 2025/11/27 20:29:15.300293 Server 2: Election finalized, leader=2, epoch=11
+ZK1 2025/11/27 20:29:15.300395 Server 1: Election finalized, leader=2, epoch=11
+ZK2 2025/11/27 20:29:15.300404 Server 2: Starting as leader
+Fatal: one(175226899121282908) failed to reach agreement
+        /home/panshul/Dev/projects/6.5840/src/zookeeper/test.go:283
+        /home/panshul/Dev/projects/6.5840/src/zookeeper/zookeeper_test.go:563
+info: wrote visualization to /tmp/porcupine-3234145542.html
+--- FAIL: TestBackup3B (11.13s)
+Test (3B): RPC counts aren't too high (reliable network)...
+ZK0 2025/11/27 20:29:15.380759 Server 0: Starting election, epoch=1, zxid=(0,0)
+ZK2 2025/11/27 20:29:15.381056 Server 2: Stepping down from 0 to Looking due to epoch 1
+ZK0 2025/11/27 20:29:15.381335 Server 0: Election finalized, leader=2, epoch=1
+ZK2 2025/11/27 20:29:15.381363 Server 2: Starting election, epoch=2, zxid=(0,0)
+ZK1 2025/11/27 20:29:15.381342 Server 1: Starting election, epoch=1, zxid=(0,0)
+ZK1 2025/11/27 20:29:15.381781 Server 1: Stepping down from 0 to Looking due to epoch 2
+ZK1 2025/11/27 20:29:15.381816 Server 1: Election finalized, leader=2, epoch=2
+ZK0 2025/11/27 20:29:15.381926 Server 0: Stepping down from 1 to Looking due to epoch 2
+ZK0 2025/11/27 20:29:15.381965 Server 0: Election finalized, leader=2, epoch=2
+ZK2 2025/11/27 20:29:15.482699 Server 2: Election finalized, leader=2, epoch=2
+ZK2 2025/11/27 20:29:15.482817 Server 2: Starting as leader
+ZK2 2025/11/27 20:29:15.485194 Server 2: Now leading with epoch 2
+2025/11/27 20:29:16 apply error: server 2 applied uncommitted index 12 > committed 8
+exit status 1
+FAIL	6.5840/zookeeper	53.344s

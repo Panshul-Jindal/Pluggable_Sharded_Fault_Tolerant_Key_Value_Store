@@ -7,7 +7,7 @@ import (
 	"time"
 	"fmt"
 
-	"6.5840/kvsrv1/rpc"
+	"6.5840/rpc"
 	"6.5840/labrpc"
 	"6.5840/raftapi"
 	"6.5840/tester1"

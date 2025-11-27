@@ -5,7 +5,7 @@ import (
     "sync/atomic"
 
     "6.5840/kvraft1/rsm"
-    "6.5840/kvsrv1/rpc"
+    "6.5840/rpc"
     "6.5840/labgob"
     "6.5840/labrpc"
     "6.5840/tester1"

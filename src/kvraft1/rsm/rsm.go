@@ -4,7 +4,7 @@ import (
 	"sync"
 	"time"
 	 "sync/atomic"
-	"6.5840/kvsrv1/rpc"
+	"6.5840/rpc"
 	"6.5840/labrpc"
 	// "6.5840/raft1"
 	"6.5840/zookeeper"
