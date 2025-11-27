@@ -6,7 +6,8 @@ import (
 	 "sync/atomic"
 	"6.5840/kvsrv1/rpc"
 	"6.5840/labrpc"
-	"6.5840/raft1"
+	// "6.5840/raft1"
+	"6.5840/zookeeper"
 	"6.5840/raftapi"
 	"6.5840/tester1"
 
@@ -50,7 +51,7 @@ type RSM struct {
 	sm           StateMachine
 	// Your definitions here.
 	lastApplied  int                  // last applied index
-pending      map[int64]chan any   // opID → response channel
+   pending      map[int64]chan any   // opID → response channel
 clientID     int64                // optional for dedup in B
 }
 
@@ -100,7 +101,8 @@ func MakeRSM(servers []*labrpc.ClientEnd, me int, persister *tester.Persister, m
 	go rsm.runReader()
 
 	if !useRaftStateMachine {
-		rsm.rf = raft.Make(servers, me, persister, rsm.applyCh)
+		// rsm.rf = raft.Make(servers, me, persister, rsm.applyCh)
+		rsm.rf = zookeeper.Make(servers, me, persister, rsm.applyCh)
 	}
 	return rsm
 }
