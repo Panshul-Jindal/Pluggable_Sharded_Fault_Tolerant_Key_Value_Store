@@ -334,6 +334,7 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	}
 
 	rf.log = append(rf.log, entry)
+	rf.matchIndex[rf.me] = index  // ✅ Important! Leader matches itself
 	rf.persist() // Persist the state immediately after changing the log
 
 	// 3. Update Leader's own tracking state (optional but clean)
@@ -343,7 +344,7 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	// 4. Optimization: Trigger a broadcast immediately so we don't wait 100ms
 	// You can call rf.broadcastHeartbeats() here if you want faster tests.
 	// Trigger broadcast immediately to speed up consensus
-    rf.broadcastHeartbeats()
+   go rf.broadcastHeartbeats()
 	return index, term, true //return index, term, isLeader
 }
 
@@ -466,6 +467,17 @@ func (rf *Raft) broadcastHeartbeats() {
 		// If follower is fully caught up, nextIndex = len(rf.log)
 
 		nextIdx := rf.nextIndex[peerIdx]
+
+
+
+		//✅ OPTIMIZATION: Skip if follower is caught up AND we're just sending heartbeat
+        // Only send if:
+        // 1. There are new entries to send (nextIdx < len(log))
+        // 2. Or follower's commitIndex might be stale (needs commit update)
+        // if nextIdx >= len(rf.log) && rf.matchIndex[peerIdx] >= commitIndex {
+        //     continue  // Follower is fully caught up, skip this RPC
+        // }
+
 
 		// Safety check: If nextIdx is invalid, reset it to a safe value///TODO Isn't needed explicitly
 		// Safety: never allow nextIdx > len(log)
@@ -749,7 +761,7 @@ func (rf *Raft) ticker() {
         if rf.state == StateLeader {
             if time.Since(rf.lastHeartbeat) >= 100*time.Millisecond {
                 rf.broadcastHeartbeats()
-                rf.resetElectionTimer() // Leaders send heartbeats every 100ms
+                rf.lastHeartbeat = time.Now()  // ✅ Just update time, don't regenerate timeout
             }
         } else {
             // Use previously generated timeout
