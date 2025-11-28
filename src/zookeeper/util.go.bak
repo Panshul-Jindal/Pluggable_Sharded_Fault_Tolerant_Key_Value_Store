@@ -1,0 +1,72 @@
+package zookeeper
+
+import (
+	// "fmt"
+	"log"
+	// "sync"
+
+	"6.5840/raftapi"
+	// "6.5840/tester1"
+)
+
+// const SnapShotInterval = 10
+
+/*type rfsrv struct {
+	mu       sync.Mutex
+	me       int
+	raft     raftapi.Raft
+	applyErr string
+	logs     map[int]interface{}
+	ts       *Test
+}
+
+func newRfsrv(ts *Test, me int, ends []*labrpc.ClientEnd, 
+	persister *tester.Persister, snapshot bool) *rfsrv {
+	
+	srv := &rfsrv{}
+	srv.me = me
+	srv.ts = ts
+	srv.logs = make(map[int]interface{})
+	
+	applyCh := make(chan raftapi.ApplyMsg)
+	srv.raft = Make(ends, me, persister, applyCh)
+	
+	go srv.applyLoop(applyCh)
+	
+	return srv
+}*/
+
+func (srv *rfsrv) applyLoop(applyCh chan raftapi.ApplyMsg) {
+	for m := range applyCh {
+		if srv.ts.checkFinished() {
+			return
+		}
+		
+		srv.mu.Lock()
+		
+		// Validate that we're not applying uncommitted entries
+		err_msg, _ := srv.ts.checkLogs(srv.me, m)
+		if err_msg != "" {
+			log.Fatalf("apply error: %s", err_msg)
+		}
+		
+		srv.mu.Unlock()
+	}
+}
+
+/*func (srv *rfsrv) Raft() raftapi.Raft {
+	srv.mu.Lock()
+	defer srv.mu.Unlock()
+	return srv.raft
+}
+
+func (srv *rfsrv) GetState() (int, bool) {
+	return srv.raft.GetState()
+}
+
+func (srv *rfsrv) Logs(index int) (interface{}, bool) {
+	srv.mu.Lock()
+	defer srv.mu.Unlock()
+	v, ok := srv.logs[index]
+	return v, ok
+}*/

@@ -1,0 +1,1018 @@
+ZK0 2025/11/27 21:07:18.109072 Server 0: Starting election, epoch=1, zxid=(0,0)
+Test (3C): basic persistence (reliable network)...
+ZK1 2025/11/27 21:07:18.109304 Server 1: Starting election, epoch=1, zxid=(0,0)
+ZK2 2025/11/27 21:07:18.109415 Server 2: Starting election, epoch=1, zxid=(0,0)
+ZK1 2025/11/27 21:07:18.110037 Server 1: Election finalized, leader=2, epoch=1
+ZK0 2025/11/27 21:07:18.110070 Server 0: Election finalized, leader=1, epoch=1
+ZK2 2025/11/27 21:07:18.110445 Server 2: Election finalized, leader=1, epoch=1
+ZK0 2025/11/27 21:07:18.992069 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 21:07:18.992252 Server 0: Starting election, epoch=2, zxid=(0,0)
+ZK2 2025/11/27 21:07:18.992605 Server 2: Stepping down from 1 to Looking due to epoch 2
+ZK1 2025/11/27 21:07:18.992737 Server 1: Stepping down from 1 to Looking due to epoch 2
+ZK0 2025/11/27 21:07:18.992956 Server 0: Election finalized, leader=2, epoch=2
+ZK1 2025/11/27 21:07:19.014605 Server 1: Election finalized, leader=2, epoch=2
+ZK2 2025/11/27 21:07:19.015316 Server 2: Election finalized, leader=2, epoch=2
+ZK2 2025/11/27 21:07:19.015457 Server 2: Starting as leader
+ZK2 2025/11/27 21:07:19.022416 Server 2: Now leading with epoch 2
+ZK0 2025/11/27 21:07:19.128707 Server 0: Starting election, epoch=3, zxid=(2,1)
+ZK1 2025/11/27 21:07:19.129026 Server 1: Starting election, epoch=3, zxid=(2,1)
+ZK2 2025/11/27 21:07:19.129389 Server 2: Starting election, epoch=3, zxid=(2,1)
+ZK1 2025/11/27 21:07:19.129731 Server 1: Election finalized, leader=2, epoch=3
+ZK0 2025/11/27 21:07:19.129733 Server 0: Election finalized, leader=2, epoch=3
+ZK2 2025/11/27 21:07:19.231080 Server 2: Election finalized, leader=2, epoch=3
+ZK2 2025/11/27 21:07:19.231132 Server 2: Starting as leader
+ZK2 2025/11/27 21:07:19.232759 Server 2: Now leading with epoch 3
+ZK2 2025/11/27 21:07:19.847322 Server 2: Starting election, epoch=4, zxid=(3,1)
+ZK1 2025/11/27 21:07:19.848201 Server 1: Stepping down from 1 to Looking due to epoch 4
+ZK0 2025/11/27 21:07:19.848399 Server 0: Stepping down from 1 to Looking due to epoch 4
+ZK1 2025/11/27 21:07:19.848805 Server 1: Election finalized, leader=2, epoch=4
+ZK0 2025/11/27 21:07:19.849101 Server 0: Election finalized, leader=2, epoch=4
+ZK2 2025/11/27 21:07:19.949456 Server 2: Election finalized, leader=2, epoch=4
+ZK2 2025/11/27 21:07:19.949623 Server 2: Starting as leader
+ZK2 2025/11/27 21:07:19.955837 Server 2: Now leading with epoch 4
+Fatal: committed values at index 1 do not match (12 != 13)
+        /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/test.go:199
+        /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/test.go:259
+        /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper_test.go:786
+info: wrote visualization to /tmp/porcupine-1793367042.html
+--- FAIL: TestPersist13C (1.92s)
+ZK0 2025/11/27 21:07:20.025139 Server 0: Starting election, epoch=1, zxid=(0,0)
+ZK2 2025/11/27 21:07:20.026167 Server 2: Starting election, epoch=1, zxid=(0,0)
+ZK1 2025/11/27 21:07:20.026513 Server 1: Starting election, epoch=1, zxid=(0,0)
+ZK3 2025/11/27 21:07:20.026578 Server 3: Starting election, epoch=1, zxid=(0,0)
+Test (3C): more persistence (reliable network)...
+ZK4 2025/11/27 21:07:20.027583 Server 4: Starting election, epoch=1, zxid=(0,0)
+==================
+WARNING: DATA RACE
+Read at 0x00c0001fe540 by goroutine 315:
+  6.5840/zookeeper.(*Raft).ProcessNotification()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:123 +0xf1
+  runtime.call32()
+      /usr/local/go/src/runtime/asm_amd64.s:775 +0x42
+  reflect.Value.Call()
+      /usr/local/go/src/reflect/value.go:365 +0xb5
+  6.5840/labrpc.(*Service).dispatch()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:526 +0x524
+  6.5840/labrpc.(*Server).dispatch()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:450 +0x24c
+  6.5840/labrpc.(*Network).processReq.func1()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:260 +0x9c
+
+Previous write at 0x00c0001fe540 by goroutine 298:
+  6.5840/zookeeper.(*Raft).startElectionLocked()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:288 +0x86
+  6.5840/zookeeper.Make.gowrap3()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:1000 +0x33
+
+Goroutine 315 (running) created at:
+  6.5840/labrpc.(*Network).processReq()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:259 +0x28a
+  6.5840/labrpc.MakeNetwork.func1.gowrap1()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:163 +0x9c
+
+Goroutine 298 (running) created at:
+  6.5840/zookeeper.Make()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:1000 +0x5ca
+  6.5840/zookeeper.newRfsrv()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/server.go:47 +0x209
+  6.5840/zookeeper.(*Test).mksrv()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/test.go:52 +0x8f
+  6.5840/zookeeper.(*Test).mksrv-fm()
+      <autogenerated>:1 +0x89
+  6.5840/tester1.(*ServerGrp).StartServer()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/group.go:239 +0x242
+  6.5840/tester1.(*ServerGrp).start()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/group.go:278 +0x59
+  6.5840/tester1.(*ServerGrp).StartServers()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/group.go:250 +0x35
+  6.5840/tester1.(*Config).MakeGroupStart()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/config.go:92 +0x89
+  6.5840/tester1.MakeConfig()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/config.go:49 +0x297
+  6.5840/zookeeper.makeTest()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/test.go:38 +0x1da
+  6.5840/zookeeper.TestPersist23C()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper_test.go:815 +0x47
+  testing.tRunner()
+      /usr/local/go/src/testing/testing.go:1934 +0x21c
+  testing.(*T).Run.gowrap1()
+      /usr/local/go/src/testing/testing.go:1997 +0x44
+==================
+==================
+WARNING: DATA RACE
+Read at 0x00c0001fe5b0 by goroutine 315:
+  6.5840/zookeeper.(*Raft).ProcessNotification()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:142 +0x66b
+  runtime.call32()
+      /usr/local/go/src/runtime/asm_amd64.s:775 +0x42
+  reflect.Value.Call()
+      /usr/local/go/src/reflect/value.go:365 +0xb5
+  6.5840/labrpc.(*Service).dispatch()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:526 +0x524
+  6.5840/labrpc.(*Server).dispatch()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:450 +0x24c
+  6.5840/labrpc.(*Network).processReq.func1()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:260 +0x9c
+
+Previous write at 0x00c0001fe5b0 by goroutine 298:
+  6.5840/zookeeper.(*Raft).startElectionLocked()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:290 +0xcc
+  6.5840/zookeeper.Make.gowrap3()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:1000 +0x33
+
+Goroutine 315 (running) created at:
+  6.5840/labrpc.(*Network).processReq()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:259 +0x28a
+  6.5840/labrpc.MakeNetwork.func1.gowrap1()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:163 +0x9c
+
+Goroutine 298 (running) created at:
+  6.5840/zookeeper.Make()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:1000 +0x5ca
+  6.5840/zookeeper.newRfsrv()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/server.go:47 +0x209
+  6.5840/zookeeper.(*Test).mksrv()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/test.go:52 +0x8f
+  6.5840/zookeeper.(*Test).mksrv-fm()
+      <autogenerated>:1 +0x89
+  6.5840/tester1.(*ServerGrp).StartServer()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/group.go:239 +0x242
+  6.5840/tester1.(*ServerGrp).start()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/group.go:278 +0x59
+  6.5840/tester1.(*ServerGrp).StartServers()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/group.go:250 +0x35
+  6.5840/tester1.(*Config).MakeGroupStart()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/config.go:92 +0x89
+  6.5840/tester1.MakeConfig()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/config.go:49 +0x297
+  6.5840/zookeeper.makeTest()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/test.go:38 +0x1da
+  6.5840/zookeeper.TestPersist23C()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper_test.go:815 +0x47
+  testing.tRunner()
+      /usr/local/go/src/testing/testing.go:1934 +0x21c
+  testing.(*T).Run.gowrap1()
+      /usr/local/go/src/testing/testing.go:1997 +0x44
+==================
+==================
+WARNING: DATA RACE
+Read at 0x00c000432d80 by goroutine 315:
+  runtime.mapaccess1_fast64()
+      /usr/local/go/src/internal/runtime/maps/runtime_fast64_swiss.go:17 +0x0
+  6.5840/zookeeper.(*Raft).ProcessNotification()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:142 +0x6b3
+  runtime.call32()
+      /usr/local/go/src/runtime/asm_amd64.s:775 +0x42
+  reflect.Value.Call()
+      /usr/local/go/src/reflect/value.go:365 +0xb5
+  6.5840/labrpc.(*Service).dispatch()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:526 +0x524
+  6.5840/labrpc.(*Server).dispatch()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:450 +0x24c
+  6.5840/labrpc.(*Network).processReq.func1()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:260 +0x9c
+
+Previous write at 0x00c000432d80 by goroutine 298:
+  runtime.mapassign_fast64()
+      /usr/local/go/src/internal/runtime/maps/runtime_fast64_swiss.go:195 +0x0
+  6.5840/zookeeper.(*Raft).startElectionLocked()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:301 +0x2ed
+  6.5840/zookeeper.Make.gowrap3()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:1000 +0x33
+
+Goroutine 315 (running) created at:
+  6.5840/labrpc.(*Network).processReq()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:259 +0x28a
+  6.5840/labrpc.MakeNetwork.func1.gowrap1()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:163 +0x9c
+
+Goroutine 298 (running) created at:
+  6.5840/zookeeper.Make()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:1000 +0x5ca
+  6.5840/zookeeper.newRfsrv()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/server.go:47 +0x209
+  6.5840/zookeeper.(*Test).mksrv()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/test.go:52 +0x8f
+  6.5840/zookeeper.(*Test).mksrv-fm()
+      <autogenerated>:1 +0x89
+  6.5840/tester1.(*ServerGrp).StartServer()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/group.go:239 +0x242
+  6.5840/tester1.(*ServerGrp).start()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/group.go:278 +0x59
+  6.5840/tester1.(*ServerGrp).StartServers()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/group.go:250 +0x35
+  6.5840/tester1.(*Config).MakeGroupStart()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/config.go:92 +0x89
+  6.5840/tester1.MakeConfig()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/config.go:49 +0x297
+  6.5840/zookeeper.makeTest()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/test.go:38 +0x1da
+  6.5840/zookeeper.TestPersist23C()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper_test.go:815 +0x47
+  testing.tRunner()
+      /usr/local/go/src/testing/testing.go:1934 +0x21c
+  testing.(*T).Run.gowrap1()
+      /usr/local/go/src/testing/testing.go:1997 +0x44
+==================
+==================
+WARNING: DATA RACE
+Read at 0x00c000415600 by goroutine 315:
+  6.5840/zookeeper.(*Raft).ProcessNotification()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:142 +0x6c4
+  runtime.call32()
+      /usr/local/go/src/runtime/asm_amd64.s:775 +0x42
+  reflect.Value.Call()
+      /usr/local/go/src/reflect/value.go:365 +0xb5
+  6.5840/labrpc.(*Service).dispatch()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:526 +0x524
+  6.5840/labrpc.(*Server).dispatch()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:450 +0x24c
+  6.5840/labrpc.(*Network).processReq.func1()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:260 +0x9c
+
+Previous write at 0x00c000415600 by goroutine 298:
+  6.5840/zookeeper.(*Raft).startElectionLocked()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:301 +0x2fc
+  6.5840/zookeeper.Make.gowrap3()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:1000 +0x33
+
+Goroutine 315 (running) created at:
+  6.5840/labrpc.(*Network).processReq()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:259 +0x28a
+  6.5840/labrpc.MakeNetwork.func1.gowrap1()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:163 +0x9c
+
+Goroutine 298 (running) created at:
+  6.5840/zookeeper.Make()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:1000 +0x5ca
+  6.5840/zookeeper.newRfsrv()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/server.go:47 +0x209
+  6.5840/zookeeper.(*Test).mksrv()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/test.go:52 +0x8f
+  6.5840/zookeeper.(*Test).mksrv-fm()
+      <autogenerated>:1 +0x89
+  6.5840/tester1.(*ServerGrp).StartServer()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/group.go:239 +0x242
+  6.5840/tester1.(*ServerGrp).start()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/group.go:278 +0x59
+  6.5840/tester1.(*ServerGrp).StartServers()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/group.go:250 +0x35
+  6.5840/tester1.(*Config).MakeGroupStart()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/config.go:92 +0x89
+  6.5840/tester1.MakeConfig()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/config.go:49 +0x297
+  6.5840/zookeeper.makeTest()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/test.go:38 +0x1da
+  6.5840/zookeeper.TestPersist23C()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper_test.go:815 +0x47
+  testing.tRunner()
+      /usr/local/go/src/testing/testing.go:1934 +0x21c
+  testing.(*T).Run.gowrap1()
+      /usr/local/go/src/testing/testing.go:1997 +0x44
+==================
+==================
+WARNING: DATA RACE
+Read at 0x00c000430d80 by goroutine 315:
+  6.5840/zookeeper.(*Raft).ProcessNotification()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:144 +0x74c
+  runtime.call32()
+      /usr/local/go/src/runtime/asm_amd64.s:775 +0x42
+  reflect.Value.Call()
+      /usr/local/go/src/reflect/value.go:365 +0xb5
+  6.5840/labrpc.(*Service).dispatch()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:526 +0x524
+  6.5840/labrpc.(*Server).dispatch()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:450 +0x24c
+  6.5840/labrpc.(*Network).processReq.func1()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:260 +0x9c
+
+Previous write at 0x00c000430d80 by goroutine 298:
+  6.5840/zookeeper.(*Raft).startElectionLocked()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:293 +0x156
+  6.5840/zookeeper.Make.gowrap3()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:1000 +0x33
+
+Goroutine 315 (running) created at:
+  6.5840/labrpc.(*Network).processReq()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:259 +0x28a
+  6.5840/labrpc.MakeNetwork.func1.gowrap1()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:163 +0x9c
+
+Goroutine 298 (running) created at:
+  6.5840/zookeeper.Make()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:1000 +0x5ca
+  6.5840/zookeeper.newRfsrv()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/server.go:47 +0x209
+  6.5840/zookeeper.(*Test).mksrv()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/test.go:52 +0x8f
+  6.5840/zookeeper.(*Test).mksrv-fm()
+      <autogenerated>:1 +0x89
+  6.5840/tester1.(*ServerGrp).StartServer()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/group.go:239 +0x242
+  6.5840/tester1.(*ServerGrp).start()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/group.go:278 +0x59
+  6.5840/tester1.(*ServerGrp).StartServers()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/group.go:250 +0x35
+  6.5840/tester1.(*Config).MakeGroupStart()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/config.go:92 +0x89
+  6.5840/tester1.MakeConfig()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/config.go:49 +0x297
+  6.5840/zookeeper.makeTest()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/test.go:38 +0x1da
+  6.5840/zookeeper.TestPersist23C()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper_test.go:815 +0x47
+  testing.tRunner()
+      /usr/local/go/src/testing/testing.go:1934 +0x21c
+  testing.(*T).Run.gowrap1()
+      /usr/local/go/src/testing/testing.go:1997 +0x44
+==================
+==================
+WARNING: DATA RACE
+Read at 0x00c000430d88 by goroutine 315:
+  6.5840/zookeeper.(*Raft).ProcessNotification()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:145 +0x797
+  runtime.call32()
+      /usr/local/go/src/runtime/asm_amd64.s:775 +0x42
+  reflect.Value.Call()
+      /usr/local/go/src/reflect/value.go:365 +0xb5
+  6.5840/labrpc.(*Service).dispatch()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:526 +0x524
+  6.5840/labrpc.(*Server).dispatch()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:450 +0x24c
+  6.5840/labrpc.(*Network).processReq.func1()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:260 +0x9c
+
+Previous write at 0x00c000430d88 by goroutine 298:
+  6.5840/zookeeper.(*Raft).startElectionLocked()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:294 +0x1b1
+  6.5840/zookeeper.Make.gowrap3()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:1000 +0x33
+
+Goroutine 315 (running) created at:
+  6.5840/labrpc.(*Network).processReq()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:259 +0x28a
+  6.5840/labrpc.MakeNetwork.func1.gowrap1()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:163 +0x9c
+
+Goroutine 298 (running) created at:
+  6.5840/zookeeper.Make()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:1000 +0x5ca
+  6.5840/zookeeper.newRfsrv()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/server.go:47 +0x209
+  6.5840/zookeeper.(*Test).mksrv()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/test.go:52 +0x8f
+  6.5840/zookeeper.(*Test).mksrv-fm()
+      <autogenerated>:1 +0x89
+  6.5840/tester1.(*ServerGrp).StartServer()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/group.go:239 +0x242
+  6.5840/tester1.(*ServerGrp).start()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/group.go:278 +0x59
+  6.5840/tester1.(*ServerGrp).StartServers()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/group.go:250 +0x35
+  6.5840/tester1.(*Config).MakeGroupStart()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/config.go:92 +0x89
+  6.5840/tester1.MakeConfig()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/config.go:49 +0x297
+  6.5840/zookeeper.makeTest()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/test.go:38 +0x1da
+  6.5840/zookeeper.TestPersist23C()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper_test.go:815 +0x47
+  testing.tRunner()
+      /usr/local/go/src/testing/testing.go:1934 +0x21c
+  testing.(*T).Run.gowrap1()
+      /usr/local/go/src/testing/testing.go:1997 +0x44
+==================
+==================
+WARNING: DATA RACE
+Read at 0x00c000430d98 by goroutine 315:
+  6.5840/zookeeper.(*Raft).ProcessNotification()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:146 +0x7f8
+  runtime.call32()
+      /usr/local/go/src/runtime/asm_amd64.s:775 +0x42
+  reflect.Value.Call()
+      /usr/local/go/src/reflect/value.go:365 +0xb5
+  6.5840/labrpc.(*Service).dispatch()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:526 +0x524
+  6.5840/labrpc.(*Server).dispatch()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:450 +0x24c
+  6.5840/labrpc.(*Network).processReq.func1()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:260 +0x9c
+
+Previous write at 0x00c000430d98 by goroutine 298:
+  6.5840/zookeeper.(*Raft).startElectionLocked()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:295 +0x204
+  6.5840/zookeeper.Make.gowrap3()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:1000 +0x33
+
+Goroutine 315 (running) created at:
+  6.5840/labrpc.(*Network).processReq()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:259 +0x28a
+  6.5840/labrpc.MakeNetwork.func1.gowrap1()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:163 +0x9c
+
+Goroutine 298 (running) created at:
+  6.5840/zookeeper.Make()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:1000 +0x5ca
+  6.5840/zookeeper.newRfsrv()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/server.go:47 +0x209
+  6.5840/zookeeper.(*Test).mksrv()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/test.go:52 +0x8f
+  6.5840/zookeeper.(*Test).mksrv-fm()
+      <autogenerated>:1 +0x89
+  6.5840/tester1.(*ServerGrp).StartServer()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/group.go:239 +0x242
+  6.5840/tester1.(*ServerGrp).start()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/group.go:278 +0x59
+  6.5840/tester1.(*ServerGrp).StartServers()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/group.go:250 +0x35
+  6.5840/tester1.(*Config).MakeGroupStart()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/config.go:92 +0x89
+  6.5840/tester1.MakeConfig()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/config.go:49 +0x297
+  6.5840/zookeeper.makeTest()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/test.go:38 +0x1da
+  6.5840/zookeeper.TestPersist23C()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper_test.go:815 +0x47
+  testing.tRunner()
+      /usr/local/go/src/testing/testing.go:1934 +0x21c
+  testing.(*T).Run.gowrap1()
+      /usr/local/go/src/testing/testing.go:1997 +0x44
+==================
+==================
+WARNING: DATA RACE
+Read at 0x00c000430db0 by goroutine 315:
+  6.5840/zookeeper.(*Raft).checkForQuorum()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:220 +0x1e9
+  6.5840/zookeeper.(*Raft).ProcessNotification()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:187 +0x111d
+  runtime.call32()
+      /usr/local/go/src/runtime/asm_amd64.s:775 +0x42
+  reflect.Value.Call()
+      /usr/local/go/src/reflect/value.go:365 +0xb5
+  6.5840/labrpc.(*Service).dispatch()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:526 +0x524
+  6.5840/labrpc.(*Server).dispatch()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:450 +0x24c
+  6.5840/labrpc.(*Network).processReq.func1()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:260 +0x9c
+
+Previous write at 0x00c000430db0 by goroutine 298:
+  6.5840/zookeeper.(*Raft).startElectionLocked()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:298 +0x28e
+  6.5840/zookeeper.Make.gowrap3()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:1000 +0x33
+
+Goroutine 315 (running) created at:
+  6.5840/labrpc.(*Network).processReq()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:259 +0x28a
+  6.5840/labrpc.MakeNetwork.func1.gowrap1()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/labrpc/labrpc.go:163 +0x9c
+
+Goroutine 298 (running) created at:
+  6.5840/zookeeper.Make()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper.go:1000 +0x5ca
+  6.5840/zookeeper.newRfsrv()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/server.go:47 +0x209
+  6.5840/zookeeper.(*Test).mksrv()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/test.go:52 +0x8f
+  6.5840/zookeeper.(*Test).mksrv-fm()
+      <autogenerated>:1 +0x89
+  6.5840/tester1.(*ServerGrp).StartServer()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/group.go:239 +0x242
+  6.5840/tester1.(*ServerGrp).start()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/group.go:278 +0x59
+  6.5840/tester1.(*ServerGrp).StartServers()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/group.go:250 +0x35
+  6.5840/tester1.(*Config).MakeGroupStart()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/config.go:92 +0x89
+  6.5840/tester1.MakeConfig()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/tester1/config.go:49 +0x297
+  6.5840/zookeeper.makeTest()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/test.go:38 +0x1da
+  6.5840/zookeeper.TestPersist23C()
+      /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper_test.go:815 +0x47
+  testing.tRunner()
+      /usr/local/go/src/testing/testing.go:1934 +0x21c
+  testing.(*T).Run.gowrap1()
+      /usr/local/go/src/testing/testing.go:1997 +0x44
+==================
+ZK4 2025/11/27 21:07:20.033956 Server 4: Election finalized, leader=3, epoch=1
+ZK0 2025/11/27 21:07:20.034513 Server 0: Election finalized, leader=4, epoch=1
+ZK2 2025/11/27 21:07:20.035049 Server 2: Election finalized, leader=4, epoch=1
+ZK1 2025/11/27 21:07:20.035397 Server 1: Election finalized, leader=4, epoch=1
+ZK3 2025/11/27 21:07:20.037485 Server 3: Election finalized, leader=4, epoch=1
+ZK3 2025/11/27 21:07:21.250106 Server 3: No heartbeat, re-entering election
+ZK3 2025/11/27 21:07:21.250733 Server 3: Starting election, epoch=2, zxid=(0,0)
+ZK0 2025/11/27 21:07:21.251767 Server 0: Stepping down from 1 to Looking due to epoch 2
+ZK4 2025/11/27 21:07:21.251975 Server 4: Stepping down from 1 to Looking due to epoch 2
+ZK1 2025/11/27 21:07:21.252185 Server 1: Stepping down from 1 to Looking due to epoch 2
+ZK2 2025/11/27 21:07:21.252185 Server 2: Stepping down from 1 to Looking due to epoch 2
+ZK2 2025/11/27 21:07:21.255401 Server 2: Election finalized, leader=3, epoch=2
+ZK3 2025/11/27 21:07:21.257111 Server 3: Election finalized, leader=3, epoch=2
+ZK3 2025/11/27 21:07:21.258085 Server 3: Starting as leader
+ZK0 2025/11/27 21:07:21.258182 Server 0: Election finalized, leader=4, epoch=2
+ZK1 2025/11/27 21:07:21.259371 Server 1: Election finalized, leader=4, epoch=2
+ZK4 2025/11/27 21:07:21.259946 Server 4: Election finalized, leader=3, epoch=2
+ZK3 2025/11/27 21:07:21.265902 Server 3: Now leading with epoch 2
+ZK4 2025/11/27 21:07:21.985215 Server 4: Starting election, epoch=3, zxid=(2,1)
+ZK0 2025/11/27 21:07:21.986528 Server 0: Starting election, epoch=3, zxid=(2,1)
+ZK1 2025/11/27 21:07:22.988715 Server 1: Starting election, epoch=3, zxid=(2,2)
+ZK4 2025/11/27 21:07:22.990941 Server 4: Election finalized, leader=1, epoch=3
+ZK1 2025/11/27 21:07:22.993146 Server 1: Election finalized, leader=1, epoch=3
+ZK0 2025/11/27 21:07:22.993419 Server 0: Election finalized, leader=1, epoch=3
+ZK1 2025/11/27 21:07:22.994661 Server 1: Starting as leader
+ZK0 2025/11/27 21:07:23.900850 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 21:07:23.901138 Server 0: Starting election, epoch=4, zxid=(2,1)
+ZK4 2025/11/27 21:07:23.901656 Server 4: Stepping down from 1 to Looking due to epoch 4
+ZK1 2025/11/27 21:07:23.901688 Server 1: Stepping down from 2 to Looking due to epoch 4
+ZK1 2025/11/27 21:07:23.902395 Server 1: Election finalized, leader=4, epoch=4
+ZK0 2025/11/27 21:07:23.902598 Server 0: Election finalized, leader=4, epoch=4
+ZK4 2025/11/27 21:07:23.902683 Server 4: Election finalized, leader=4, epoch=4
+ZK4 2025/11/27 21:07:23.902765 Server 4: Starting as leader
+ZK1 2025/11/27 21:07:25.018310 Server 1: No heartbeat, re-entering election
+ZK1 2025/11/27 21:07:25.018552 Server 1: Starting election, epoch=5, zxid=(2,2)
+ZK4 2025/11/27 21:07:25.018946 Server 4: Stepping down from 2 to Looking due to epoch 5
+ZK0 2025/11/27 21:07:25.018946 Server 0: Stepping down from 1 to Looking due to epoch 5
+ZK0 2025/11/27 21:07:25.019589 Server 0: Election finalized, leader=1, epoch=5
+ZK4 2025/11/27 21:07:25.019746 Server 4: Election finalized, leader=1, epoch=5
+ZK1 2025/11/27 21:07:25.019779 Server 1: Election finalized, leader=1, epoch=5
+ZK1 2025/11/27 21:07:25.019902 Server 1: Starting as leader
+ZK4 2025/11/27 21:07:25.894222 Server 4: No heartbeat, re-entering election
+ZK4 2025/11/27 21:07:25.894495 Server 4: Starting election, epoch=6, zxid=(2,1)
+ZK1 2025/11/27 21:07:25.894879 Server 1: Stepping down from 2 to Looking due to epoch 6
+ZK0 2025/11/27 21:07:25.894959 Server 0: Stepping down from 1 to Looking due to epoch 6
+ZK0 2025/11/27 21:07:25.895682 Server 0: Election finalized, leader=4, epoch=6
+ZK1 2025/11/27 21:07:25.895778 Server 1: Election finalized, leader=4, epoch=6
+ZK4 2025/11/27 21:07:25.895801 Server 4: Election finalized, leader=4, epoch=6
+ZK4 2025/11/27 21:07:25.895897 Server 4: Starting as leader
+ZK0 2025/11/27 21:07:26.771001 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 21:07:26.771611 Server 0: Starting election, epoch=7, zxid=(2,1)
+ZK4 2025/11/27 21:07:26.772602 Server 4: Stepping down from 2 to Looking due to epoch 7
+ZK1 2025/11/27 21:07:26.772683 Server 1: Stepping down from 1 to Looking due to epoch 7
+ZK4 2025/11/27 21:07:26.774913 Server 4: Election finalized, leader=1, epoch=7
+ZK1 2025/11/27 21:07:26.775342 Server 1: Election finalized, leader=1, epoch=7
+ZK1 2025/11/27 21:07:26.775393 Server 1: Starting as leader
+ZK0 2025/11/27 21:07:26.775543 Server 0: Election finalized, leader=1, epoch=7
+ZK4 2025/11/27 21:07:27.671038 Server 4: No heartbeat, re-entering election
+ZK4 2025/11/27 21:07:27.671648 Server 4: Starting election, epoch=8, zxid=(2,1)
+ZK1 2025/11/27 21:07:27.672769 Server 1: Stepping down from 2 to Looking due to epoch 8
+ZK0 2025/11/27 21:07:27.672891 Server 0: Stepping down from 1 to Looking due to epoch 8
+ZK0 2025/11/27 21:07:27.674680 Server 0: Election finalized, leader=4, epoch=8
+ZK1 2025/11/27 21:07:27.674691 Server 1: Election finalized, leader=4, epoch=8
+ZK4 2025/11/27 21:07:27.674909 Server 4: Election finalized, leader=4, epoch=8
+ZK4 2025/11/27 21:07:27.675259 Server 4: Starting as leader
+ZK0 2025/11/27 21:07:29.063254 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 21:07:29.063739 Server 0: Starting election, epoch=9, zxid=(2,1)
+ZK1 2025/11/27 21:07:29.064811 Server 1: Stepping down from 1 to Looking due to epoch 9
+ZK4 2025/11/27 21:07:29.064834 Server 4: Stepping down from 2 to Looking due to epoch 9
+ZK4 2025/11/27 21:07:29.067112 Server 4: Election finalized, leader=1, epoch=9
+ZK0 2025/11/27 21:07:29.068137 Server 0: Election finalized, leader=1, epoch=9
+ZK1 2025/11/27 21:07:29.069482 Server 1: Election timeout in LOOKING, restarting election
+ZK1 2025/11/27 21:07:29.069875 Server 1: Starting election, epoch=10, zxid=(2,2)
+ZK4 2025/11/27 21:07:29.070833 Server 4: Stepping down from 1 to Looking due to epoch 10
+ZK0 2025/11/27 21:07:29.070968 Server 0: Stepping down from 1 to Looking due to epoch 10
+ZK0 2025/11/27 21:07:29.072143 Server 0: Election finalized, leader=1, epoch=10
+ZK4 2025/11/27 21:07:29.072803 Server 4: Election finalized, leader=1, epoch=10
+ZK1 2025/11/27 21:07:29.073287 Server 1: Election finalized, leader=1, epoch=10
+ZK1 2025/11/27 21:07:29.073378 Server 1: Starting as leader
+ZK4 2025/11/27 21:07:29.943603 Server 4: No heartbeat, re-entering election
+ZK4 2025/11/27 21:07:29.944201 Server 4: Starting election, epoch=11, zxid=(2,1)
+ZK0 2025/11/27 21:07:29.945551 Server 0: Stepping down from 1 to Looking due to epoch 11
+ZK1 2025/11/27 21:07:29.945623 Server 1: Stepping down from 2 to Looking due to epoch 11
+ZK1 2025/11/27 21:07:29.947735 Server 1: Election finalized, leader=4, epoch=11
+ZK0 2025/11/27 21:07:29.948181 Server 0: Election finalized, leader=4, epoch=11
+ZK4 2025/11/27 21:07:29.948503 Server 4: Election finalized, leader=4, epoch=11
+ZK4 2025/11/27 21:07:29.948744 Server 4: Starting as leader
+ZK0 2025/11/27 21:07:30.794951 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 21:07:30.795425 Server 0: Starting election, epoch=12, zxid=(2,1)
+ZK1 2025/11/27 21:07:30.796487 Server 1: Stepping down from 1 to Looking due to epoch 12
+ZK4 2025/11/27 21:07:30.796599 Server 4: Stepping down from 2 to Looking due to epoch 12
+ZK4 2025/11/27 21:07:30.799595 Server 4: Election finalized, leader=1, epoch=12
+ZK0 2025/11/27 21:07:30.800030 Server 0: Election finalized, leader=1, epoch=12
+ZK1 2025/11/27 21:07:30.800076 Server 1: Election finalized, leader=1, epoch=12
+ZK1 2025/11/27 21:07:30.800178 Server 1: Starting as leader
+ZK4 2025/11/27 21:07:31.747883 Server 4: No heartbeat, re-entering election
+ZK4 2025/11/27 21:07:31.748539 Server 4: Starting election, epoch=13, zxid=(2,1)
+ZK1 2025/11/27 21:07:31.749929 Server 1: Stepping down from 2 to Looking due to epoch 13
+ZK0 2025/11/27 21:07:31.749993 Server 0: Stepping down from 1 to Looking due to epoch 13
+ZK0 2025/11/27 21:07:31.751887 Server 0: Election finalized, leader=4, epoch=13
+ZK1 2025/11/27 21:07:31.752359 Server 1: Election finalized, leader=4, epoch=13
+ZK4 2025/11/27 21:07:31.752474 Server 4: Election finalized, leader=4, epoch=13
+ZK4 2025/11/27 21:07:31.752644 Server 4: Starting as leader
+Fatal: one(13) failed to reach agreement
+        /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/test.go:283
+        /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper_test.go:851
+info: wrote visualization to /tmp/porcupine-3217255059.html
+--- FAIL: TestPersist23C (12.98s)
+    testing.go:1617: race detected during execution of test
+ZK0 2025/11/27 21:07:32.999935 Server 0: Starting election, epoch=1, zxid=(0,0)
+ZK1 2025/11/27 21:07:32.999988 Server 1: Starting election, epoch=1, zxid=(0,0)
+Test (3C): partitioned leader and one follower crash, leader restarts (reliable network)...
+ZK2 2025/11/27 21:07:33.000102 Server 2: Starting election, epoch=1, zxid=(0,0)
+ZK0 2025/11/27 21:07:33.000656 Server 0: Election finalized, leader=1, epoch=1
+ZK1 2025/11/27 21:07:33.000673 Server 1: Election finalized, leader=2, epoch=1
+ZK2 2025/11/27 21:07:33.001520 Server 2: Election finalized, leader=1, epoch=1
+ZK4 2025/11/27 21:07:33.569942 Server 4: Synchronization failed
+ZK4 2025/11/27 21:07:33.570472 Server 4: Starting election, epoch=14, zxid=(2,1)
+ZK1 2025/11/27 21:07:33.826432 Server 1: No heartbeat, re-entering election
+ZK1 2025/11/27 21:07:33.826900 Server 1: Starting election, epoch=2, zxid=(0,0)
+ZK2 2025/11/27 21:07:33.827586 Server 2: Stepping down from 1 to Looking due to epoch 2
+ZK0 2025/11/27 21:07:33.827614 Server 0: Stepping down from 1 to Looking due to epoch 2
+ZK0 2025/11/27 21:07:33.827872 Server 0: Election finalized, leader=1, epoch=2
+ZK1 2025/11/27 21:07:33.828213 Server 1: Election finalized, leader=2, epoch=2
+ZK2 2025/11/27 21:07:33.905618 Server 2: Election finalized, leader=2, epoch=2
+ZK2 2025/11/27 21:07:33.905885 Server 2: Starting as leader
+ZK2 2025/11/27 21:07:33.908590 Server 2: Now leading with epoch 2
+ZK2 2025/11/27 21:07:34.523486 Server 2: Starting election, epoch=3, zxid=(2,2)
+ZK1 2025/11/27 21:07:34.524412 Server 1: Stepping down from 1 to Looking due to epoch 3
+ZK1 2025/11/27 21:07:34.524940 Server 1: Election finalized, leader=2, epoch=3
+ZK2 2025/11/27 21:07:34.624430 Server 2: Election finalized, leader=2, epoch=3
+ZK2 2025/11/27 21:07:34.624528 Server 2: Starting as leader
+ZK1 2025/11/27 21:07:35.763390 Server 1: No heartbeat, re-entering election
+ZK1 2025/11/27 21:07:35.763805 Server 1: Starting election, epoch=4, zxid=(2,1)
+ZK2 2025/11/27 21:07:35.764728 Server 2: Stepping down from 2 to Looking due to epoch 4
+ZK2 2025/11/27 21:07:35.765120 Server 2: Election finalized, leader=1, epoch=4
+ZK1 2025/11/27 21:07:35.818193 Server 1: Election finalized, leader=1, epoch=4
+ZK1 2025/11/27 21:07:35.818241 Server 1: Starting as leader
+ZK2 2025/11/27 21:07:36.870523 Server 2: No heartbeat, re-entering election
+ZK2 2025/11/27 21:07:36.871157 Server 2: Starting election, epoch=5, zxid=(2,2)
+ZK1 2025/11/27 21:07:36.872241 Server 1: Stepping down from 2 to Looking due to epoch 5
+ZK1 2025/11/27 21:07:36.872754 Server 1: Election finalized, leader=2, epoch=5
+ZK2 2025/11/27 21:07:36.940109 Server 2: Election finalized, leader=2, epoch=5
+ZK2 2025/11/27 21:07:36.940225 Server 2: Starting as leader
+ZK1 2025/11/27 21:07:37.760746 Server 1: No heartbeat, re-entering election
+ZK1 2025/11/27 21:07:37.761325 Server 1: Starting election, epoch=6, zxid=(2,1)
+ZK2 2025/11/27 21:07:37.762423 Server 2: Stepping down from 2 to Looking due to epoch 6
+ZK2 2025/11/27 21:07:37.762968 Server 2: Election finalized, leader=1, epoch=6
+ZK1 2025/11/27 21:07:37.830066 Server 1: Election finalized, leader=1, epoch=6
+ZK1 2025/11/27 21:07:37.830142 Server 1: Starting as leader
+ZK2 2025/11/27 21:07:39.346652 Server 2: No heartbeat, re-entering election
+ZK2 2025/11/27 21:07:39.347206 Server 2: Starting election, epoch=7, zxid=(2,2)
+ZK1 2025/11/27 21:07:39.348026 Server 1: Stepping down from 2 to Looking due to epoch 7
+ZK1 2025/11/27 21:07:39.348464 Server 1: Election finalized, leader=2, epoch=7
+ZK2 2025/11/27 21:07:39.354315 Server 2: Election finalized, leader=2, epoch=7
+ZK2 2025/11/27 21:07:39.354465 Server 2: Starting as leader
+ZK1 2025/11/27 21:07:40.874032 Server 1: No heartbeat, re-entering election
+ZK1 2025/11/27 21:07:40.874519 Server 1: Starting election, epoch=8, zxid=(2,1)
+ZK2 2025/11/27 21:07:40.875407 Server 2: Stepping down from 2 to Looking due to epoch 8
+ZK2 2025/11/27 21:07:40.875846 Server 2: Election finalized, leader=1, epoch=8
+ZK1 2025/11/27 21:07:40.955888 Server 1: Election finalized, leader=1, epoch=8
+ZK1 2025/11/27 21:07:40.955957 Server 1: Starting as leader
+ZK2 2025/11/27 21:07:42.430350 Server 2: No heartbeat, re-entering election
+ZK2 2025/11/27 21:07:42.430928 Server 2: Starting election, epoch=9, zxid=(2,1)
+ZK1 2025/11/27 21:07:42.431826 Server 1: Stepping down from 2 to Looking due to epoch 9
+ZK1 2025/11/27 21:07:42.432286 Server 1: Election finalized, leader=2, epoch=9
+ZK2 2025/11/27 21:07:42.480062 Server 2: Election finalized, leader=2, epoch=9
+ZK2 2025/11/27 21:07:42.480143 Server 2: Starting as leader
+ZK1 2025/11/27 21:07:43.999769 Server 1: No heartbeat, re-entering election
+ZK1 2025/11/27 21:07:44.000242 Server 1: Starting election, epoch=10, zxid=(2,1)
+ZK2 2025/11/27 21:07:44.001227 Server 2: Stepping down from 2 to Looking due to epoch 10
+ZK2 2025/11/27 21:07:44.001661 Server 2: Election finalized, leader=1, epoch=10
+ZK1 2025/11/27 21:07:44.077305 Server 1: Election finalized, leader=1, epoch=10
+ZK1 2025/11/27 21:07:44.077425 Server 1: Starting as leader
+Fatal: one(103) failed to reach agreement
+        /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/test.go:283
+        /home/ansaki57/Documents/ClassesFiles/Sem5/DistrCompute/Pluggable_Sharded_Fault_Tolerant_Key_Value_Store/src/zookeeper/zookeeper_test.go:886
+info: wrote visualization to /tmp/porcupine-2670968655.html
+--- FAIL: TestPersist33C (11.57s)
+ZK0 2025/11/27 21:07:44.571728 Server 0: Starting election, epoch=1, zxid=(0,0)
+ZK1 2025/11/27 21:07:44.572242 Server 1: Starting election, epoch=1, zxid=(0,0)
+ZK2 2025/11/27 21:07:44.572374 Server 2: Starting election, epoch=1, zxid=(0,0)
+ZK3 2025/11/27 21:07:44.572735 Server 3: Starting election, epoch=1, zxid=(0,0)
+ZK4 2025/11/27 21:07:44.572860 Server 4: Starting election, epoch=1, zxid=(0,0)
+Test (3C): Figure 8 (reliable network)...
+ZK0 2025/11/27 21:07:44.574582 Server 0: Election finalized, leader=3, epoch=1
+ZK2 2025/11/27 21:07:44.574999 Server 2: Election finalized, leader=3, epoch=1
+ZK1 2025/11/27 21:07:44.575287 Server 1: Election finalized, leader=3, epoch=1
+ZK4 2025/11/27 21:07:44.576714 Server 4: Election finalized, leader=3, epoch=1
+ZK3 2025/11/27 21:07:44.577573 Server 3: Election finalized, leader=3, epoch=1
+ZK3 2025/11/27 21:07:44.577781 Server 3: Starting as leader
+ZK3 2025/11/27 21:07:44.580115 Server 3: Now leading with epoch 1
+ZK1 2025/11/27 21:07:45.533610 Server 1: No heartbeat, re-entering election
+ZK1 2025/11/27 21:07:45.533851 Server 1: Starting election, epoch=2, zxid=(1,2)
+ZK4 2025/11/27 21:07:45.534187 Server 4: Stepping down from 1 to Looking due to epoch 2
+ZK0 2025/11/27 21:07:45.534290 Server 0: Stepping down from 1 to Looking due to epoch 2
+ZK2 2025/11/27 21:07:45.534289 Server 2: Stepping down from 1 to Looking due to epoch 2
+ZK2 2025/11/27 21:07:45.535579 Server 2: Election finalized, leader=4, epoch=2
+ZK1 2025/11/27 21:07:45.535697 Server 1: Election finalized, leader=4, epoch=2
+ZK0 2025/11/27 21:07:45.535806 Server 0: Election finalized, leader=4, epoch=2
+ZK4 2025/11/27 21:07:45.535960 Server 4: Election finalized, leader=4, epoch=2
+ZK4 2025/11/27 21:07:45.536022 Server 4: Starting as leader
+ZK2 2025/11/27 21:07:46.513734 Server 2: No heartbeat, re-entering election
+ZK2 2025/11/27 21:07:46.514239 Server 2: Starting election, epoch=3, zxid=(1,2)
+ZK4 2025/11/27 21:07:46.515065 Server 4: Stepping down from 2 to Looking due to epoch 3
+ZK0 2025/11/27 21:07:46.515242 Server 0: Stepping down from 1 to Looking due to epoch 3
+ZK1 2025/11/27 21:07:46.515304 Server 1: Stepping down from 1 to Looking due to epoch 3
+ZK1 2025/11/27 21:07:46.516986 Server 1: Election finalized, leader=2, epoch=3
+ZK0 2025/11/27 21:07:46.517434 Server 0: Election finalized, leader=2, epoch=3
+ZK4 2025/11/27 21:07:46.517752 Server 4: Election finalized, leader=2, epoch=3
+ZK2 2025/11/27 21:07:46.517828 Server 2: Election finalized, leader=2, epoch=3
+ZK2 2025/11/27 21:07:46.519557 Server 2: Starting as leader
+ZK1 2025/11/27 21:07:47.600267 Server 1: No heartbeat, re-entering election
+ZK1 2025/11/27 21:07:47.600895 Server 1: Starting election, epoch=4, zxid=(1,2)
+ZK0 2025/11/27 21:07:47.602009 Server 0: Stepping down from 1 to Looking due to epoch 4
+ZK2 2025/11/27 21:07:47.602061 Server 2: Stepping down from 2 to Looking due to epoch 4
+ZK4 2025/11/27 21:07:47.602226 Server 4: Stepping down from 1 to Looking due to epoch 4
+ZK0 2025/11/27 21:07:47.604355 Server 0: Election finalized, leader=1, epoch=4
+ZK2 2025/11/27 21:07:47.605760 Server 2: Election finalized, leader=1, epoch=4
+ZK4 2025/11/27 21:07:47.906997 Server 4: Election timeout in LOOKING, restarting election
+ZK4 2025/11/27 21:07:47.907281 Server 4: Starting election, epoch=5, zxid=(1,2)
+ZK1 2025/11/27 21:07:47.908084 Server 1: Stepping down from 0 to Looking due to epoch 5
+ZK2 2025/11/27 21:07:47.908072 Server 2: Stepping down from 1 to Looking due to epoch 5
+ZK0 2025/11/27 21:07:47.908072 Server 0: Stepping down from 1 to Looking due to epoch 5
+ZK0 2025/11/27 21:07:47.908825 Server 0: Election finalized, leader=4, epoch=5
+ZK2 2025/11/27 21:07:47.909015 Server 2: Election finalized, leader=4, epoch=5
+ZK1 2025/11/27 21:07:47.909148 Server 1: Election finalized, leader=4, epoch=5
+ZK4 2025/11/27 21:07:47.910103 Server 4: Election finalized, leader=4, epoch=5
+ZK4 2025/11/27 21:07:47.910158 Server 4: Starting as leader
+ZK0 2025/11/27 21:07:48.822457 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 21:07:48.822895 Server 0: Starting election, epoch=6, zxid=(1,2)
+ZK4 2025/11/27 21:07:48.823812 Server 4: Stepping down from 2 to Looking due to epoch 6
+ZK2 2025/11/27 21:07:48.823920 Server 2: Stepping down from 1 to Looking due to epoch 6
+ZK1 2025/11/27 21:07:48.823829 Server 1: Stepping down from 1 to Looking due to epoch 6
+ZK0 2025/11/27 21:07:48.826275 Server 0: Election finalized, leader=2, epoch=6
+ZK2 2025/11/27 21:07:48.826469 Server 2: Election finalized, leader=2, epoch=6
+ZK4 2025/11/27 21:07:48.827023 Server 4: Election finalized, leader=2, epoch=6
+ZK2 2025/11/27 21:07:48.827137 Server 2: Starting as leader
+ZK1 2025/11/27 21:07:48.827530 Server 1: Election finalized, leader=2, epoch=6
+ZK0 2025/11/27 21:07:49.803259 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 21:07:49.803506 Server 0: Starting election, epoch=7, zxid=(1,2)
+ZK1 2025/11/27 21:07:49.803971 Server 1: Stepping down from 1 to Looking due to epoch 7
+ZK4 2025/11/27 21:07:49.804012 Server 4: Stepping down from 1 to Looking due to epoch 7
+ZK2 2025/11/27 21:07:49.804011 Server 2: Stepping down from 2 to Looking due to epoch 7
+ZK2 2025/11/27 21:07:49.805313 Server 2: Election finalized, leader=1, epoch=7
+ZK0 2025/11/27 21:07:49.806361 Server 0: Election finalized, leader=4, epoch=7
+ZK4 2025/11/27 21:07:49.806544 Server 4: Election finalized, leader=4, epoch=7
+ZK4 2025/11/27 21:07:49.806575 Server 4: Starting as leader
+ZK1 2025/11/27 21:07:49.806889 Server 1: Election finalized, leader=4, epoch=7
+ZK1 2025/11/27 21:07:50.616983 Server 1: Synchronization failed
+ZK1 2025/11/27 21:07:50.617529 Server 1: Starting election, epoch=11, zxid=(2,1)
+ZK2 2025/11/27 21:07:50.641259 Server 2: No heartbeat, re-entering election
+ZK2 2025/11/27 21:07:50.641901 Server 2: Starting election, epoch=8, zxid=(1,2)
+ZK4 2025/11/27 21:07:50.642774 Server 4: Stepping down from 2 to Looking due to epoch 8
+ZK0 2025/11/27 21:07:50.643035 Server 0: Stepping down from 1 to Looking due to epoch 8
+ZK1 2025/11/27 21:07:50.643075 Server 1: Stepping down from 1 to Looking due to epoch 8
+ZK1 2025/11/27 21:07:50.644742 Server 1: Election finalized, leader=2, epoch=8
+ZK4 2025/11/27 21:07:50.645942 Server 4: Election finalized, leader=2, epoch=8
+ZK0 2025/11/27 21:07:50.646096 Server 0: Election finalized, leader=2, epoch=8
+ZK2 2025/11/27 21:07:50.647612 Server 2: Election finalized, leader=2, epoch=8
+ZK2 2025/11/27 21:07:50.647937 Server 2: Starting as leader
+ZK0 2025/11/27 21:07:51.518589 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 21:07:51.519204 Server 0: Starting election, epoch=9, zxid=(1,2)
+ZK4 2025/11/27 21:07:51.519965 Server 4: Stepping down from 1 to Looking due to epoch 9
+ZK1 2025/11/27 21:07:51.520036 Server 1: Stepping down from 1 to Looking due to epoch 9
+ZK2 2025/11/27 21:07:51.520208 Server 2: Stepping down from 2 to Looking due to epoch 9
+ZK2 2025/11/27 21:07:51.522907 Server 2: Election finalized, leader=4, epoch=9
+ZK4 2025/11/27 21:07:51.523764 Server 4: Election finalized, leader=4, epoch=9
+ZK0 2025/11/27 21:07:51.524381 Server 0: Election finalized, leader=4, epoch=9
+ZK4 2025/11/27 21:07:51.524655 Server 4: Starting as leader
+ZK1 2025/11/27 21:07:51.525544 Server 1: Election finalized, leader=4, epoch=9
+ZK1 2025/11/27 21:07:52.579058 Server 1: No heartbeat, re-entering election
+ZK1 2025/11/27 21:07:52.579634 Server 1: Starting election, epoch=10, zxid=(1,2)
+ZK0 2025/11/27 21:07:52.585368 Server 0: Stepping down from 1 to Looking due to epoch 10
+ZK2 2025/11/27 21:07:52.585689 Server 2: Stepping down from 1 to Looking due to epoch 10
+ZK4 2025/11/27 21:07:52.585689 Server 4: Stepping down from 2 to Looking due to epoch 10
+ZK4 2025/11/27 21:07:52.587395 Server 4: Election finalized, leader=1, epoch=10
+ZK0 2025/11/27 21:07:52.588235 Server 0: Election finalized, leader=1, epoch=10
+ZK2 2025/11/27 21:07:52.589949 Server 2: Election finalized, leader=1, epoch=10
+ZK4 2025/11/27 21:07:53.510582 Server 4: No heartbeat, re-entering election
+ZK4 2025/11/27 21:07:53.510788 Server 4: Starting election, epoch=11, zxid=(1,2)
+ZK2 2025/11/27 21:07:53.511124 Server 2: Stepping down from 1 to Looking due to epoch 11
+ZK1 2025/11/27 21:07:53.511144 Server 1: Stepping down from 0 to Looking due to epoch 11
+ZK0 2025/11/27 21:07:53.511166 Server 0: Stepping down from 1 to Looking due to epoch 11
+ZK1 2025/11/27 21:07:53.511963 Server 1: Election finalized, leader=2, epoch=11
+ZK4 2025/11/27 21:07:53.511979 Server 4: Election finalized, leader=2, epoch=11
+ZK0 2025/11/27 21:07:53.512085 Server 0: Election finalized, leader=2, epoch=11
+ZK2 2025/11/27 21:07:53.512094 Server 2: Election finalized, leader=2, epoch=11
+ZK2 2025/11/27 21:07:53.512163 Server 2: Starting as leader
+ZK0 2025/11/27 21:07:54.326103 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 21:07:54.326606 Server 0: Starting election, epoch=12, zxid=(1,2)
+ZK1 2025/11/27 21:07:54.326911 Server 1: Stepping down from 1 to Looking due to epoch 12
+ZK4 2025/11/27 21:07:54.326923 Server 4: Stepping down from 1 to Looking due to epoch 12
+ZK2 2025/11/27 21:07:54.327021 Server 2: Stepping down from 2 to Looking due to epoch 12
+ZK4 2025/11/27 21:07:54.327857 Server 4: Election finalized, leader=4, epoch=12
+ZK0 2025/11/27 21:07:54.327931 Server 0: Election finalized, leader=4, epoch=12
+ZK4 2025/11/27 21:07:54.327955 Server 4: Starting as leader
+ZK2 2025/11/27 21:07:54.328238 Server 2: Election finalized, leader=4, epoch=12
+ZK0 2025/11/27 21:07:55.254572 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 21:07:55.254917 Server 0: Starting election, epoch=13, zxid=(1,2)
+ZK4 2025/11/27 21:07:55.255237 Server 4: Stepping down from 2 to Looking due to epoch 13
+ZK1 2025/11/27 21:07:55.255265 Server 1: Stepping down from 1 to Looking due to epoch 13
+ZK2 2025/11/27 21:07:55.255274 Server 2: Stepping down from 1 to Looking due to epoch 13
+ZK4 2025/11/27 21:07:55.256416 Server 4: Election finalized, leader=2, epoch=13
+ZK0 2025/11/27 21:07:55.256726 Server 0: Election finalized, leader=2, epoch=13
+ZK2 2025/11/27 21:07:55.256909 Server 2: Election finalized, leader=2, epoch=13
+ZK2 2025/11/27 21:07:55.257097 Server 2: Starting as leader
+ZK1 2025/11/27 21:07:55.257334 Server 1: Election finalized, leader=2, epoch=13
+ZK0 2025/11/27 21:07:56.397705 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 21:07:56.397937 Server 0: Starting election, epoch=14, zxid=(1,2)
+ZK1 2025/11/27 21:07:56.398385 Server 1: Stepping down from 1 to Looking due to epoch 14
+ZK4 2025/11/27 21:07:56.398433 Server 4: Stepping down from 1 to Looking due to epoch 14
+ZK2 2025/11/27 21:07:56.398386 Server 2: Stepping down from 2 to Looking due to epoch 14
+ZK0 2025/11/27 21:07:56.400246 Server 0: Election finalized, leader=4, epoch=14
+ZK2 2025/11/27 21:07:56.400512 Server 2: Election finalized, leader=4, epoch=14
+ZK1 2025/11/27 21:07:56.400924 Server 1: Election finalized, leader=4, epoch=14
+ZK4 2025/11/27 21:07:56.401020 Server 4: Election finalized, leader=4, epoch=14
+ZK4 2025/11/27 21:07:56.401108 Server 4: Starting as leader
+ZK0 2025/11/27 21:07:57.247023 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 21:07:57.247293 Server 0: Starting election, epoch=15, zxid=(1,2)
+ZK2 2025/11/27 21:07:57.247709 Server 2: Stepping down from 1 to Looking due to epoch 15
+ZK1 2025/11/27 21:07:57.247710 Server 1: Stepping down from 1 to Looking due to epoch 15
+ZK4 2025/11/27 21:07:57.247829 Server 4: Stepping down from 2 to Looking due to epoch 15
+ZK4 2025/11/27 21:07:57.249140 Server 4: Election finalized, leader=2, epoch=15
+ZK0 2025/11/27 21:07:57.249220 Server 0: Election finalized, leader=2, epoch=15
+ZK1 2025/11/27 21:07:57.249445 Server 1: Election finalized, leader=2, epoch=15
+ZK2 2025/11/27 21:07:57.249491 Server 2: Election finalized, leader=2, epoch=15
+ZK2 2025/11/27 21:07:57.249774 Server 2: Starting as leader
+ZK1 2025/11/27 21:07:58.112523 Server 1: No heartbeat, re-entering election
+ZK1 2025/11/27 21:07:58.113248 Server 1: Starting election, epoch=16, zxid=(1,2)
+ZK4 2025/11/27 21:07:58.114723 Server 4: Stepping down from 1 to Looking due to epoch 16
+ZK2 2025/11/27 21:07:58.114820 Server 2: Stepping down from 2 to Looking due to epoch 16
+ZK0 2025/11/27 21:07:58.115001 Server 0: Stepping down from 1 to Looking due to epoch 16
+ZK2 2025/11/27 21:07:58.122301 Server 2: Election finalized, leader=4, epoch=16
+ZK1 2025/11/27 21:07:58.123202 Server 1: Election finalized, leader=4, epoch=16
+ZK4 2025/11/27 21:07:58.123943 Server 4: Election finalized, leader=4, epoch=16
+ZK0 2025/11/27 21:07:58.124243 Server 0: Election finalized, leader=4, epoch=16
+ZK4 2025/11/27 21:07:58.124750 Server 4: Starting as leader
+ZK1 2025/11/27 21:07:59.031060 Server 1: No heartbeat, re-entering election
+ZK1 2025/11/27 21:07:59.031515 Server 1: Starting election, epoch=17, zxid=(1,2)
+ZK0 2025/11/27 21:07:59.032401 Server 0: Stepping down from 1 to Looking due to epoch 17
+ZK2 2025/11/27 21:07:59.032540 Server 2: Stepping down from 1 to Looking due to epoch 17
+ZK4 2025/11/27 21:07:59.032611 Server 4: Stepping down from 2 to Looking due to epoch 17
+ZK2 2025/11/27 21:07:59.035175 Server 2: Election finalized, leader=1, epoch=17
+ZK0 2025/11/27 21:07:59.036307 Server 0: Election finalized, leader=1, epoch=17
+ZK4 2025/11/27 21:07:59.037873 Server 4: Election finalized, leader=2, epoch=17
+ZK1 2025/11/27 21:07:59.038428 Server 1: Election finalized, leader=2, epoch=17
+ZK0 2025/11/27 21:08:00.070255 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 21:08:00.070794 Server 0: Starting election, epoch=18, zxid=(1,2)
+ZK4 2025/11/27 21:08:00.071816 Server 4: Stepping down from 1 to Looking due to epoch 18
+ZK1 2025/11/27 21:08:00.071903 Server 1: Stepping down from 1 to Looking due to epoch 18
+ZK2 2025/11/27 21:08:00.071841 Server 2: Stepping down from 1 to Looking due to epoch 18
+ZK4 2025/11/27 21:08:00.074875 Server 4: Election finalized, leader=2, epoch=18
+ZK0 2025/11/27 21:08:00.076489 Server 0: Election finalized, leader=2, epoch=18
+ZK1 2025/11/27 21:08:00.077589 Server 1: Election finalized, leader=2, epoch=18
+ZK2 2025/11/27 21:08:00.078572 Server 2: Election finalized, leader=2, epoch=18
+ZK2 2025/11/27 21:08:00.078718 Server 2: Starting as leader
+ZK0 2025/11/27 21:08:00.883033 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 21:08:00.883566 Server 0: Starting election, epoch=19, zxid=(1,2)
+ZK2 2025/11/27 21:08:00.884739 Server 2: Stepping down from 2 to Looking due to epoch 19
+ZK4 2025/11/27 21:08:00.884763 Server 4: Stepping down from 1 to Looking due to epoch 19
+ZK1 2025/11/27 21:08:00.884953 Server 1: Stepping down from 1 to Looking due to epoch 19
+ZK2 2025/11/27 21:08:00.888125 Server 2: Election finalized, leader=4, epoch=19
+ZK0 2025/11/27 21:08:00.889478 Server 0: Election finalized, leader=4, epoch=19
+ZK4 2025/11/27 21:08:00.889995 Server 4: Election finalized, leader=4, epoch=19
+ZK4 2025/11/27 21:08:00.890359 Server 4: Starting as leader
+ZK1 2025/11/27 21:08:00.891058 Server 1: Election finalized, leader=4, epoch=19
+ZK0 2025/11/27 21:08:02.283211 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 21:08:02.283750 Server 0: Starting election, epoch=20, zxid=(1,2)
+ZK2 2025/11/27 21:08:02.285038 Server 2: Stepping down from 1 to Looking due to epoch 20
+ZK4 2025/11/27 21:08:02.285098 Server 4: Stepping down from 2 to Looking due to epoch 20
+ZK1 2025/11/27 21:08:02.285167 Server 1: Stepping down from 1 to Looking due to epoch 20
+ZK4 2025/11/27 21:08:02.288895 Server 4: Election finalized, leader=2, epoch=20
+ZK2 2025/11/27 21:08:02.290280 Server 2: Election finalized, leader=2, epoch=20
+ZK2 2025/11/27 21:08:02.290675 Server 2: Starting as leader
+ZK0 2025/11/27 21:08:02.291642 Server 0: Election finalized, leader=2, epoch=20
+ZK1 2025/11/27 21:08:02.290322 Server 1: Election finalized, leader=2, epoch=20
+ZK0 2025/11/27 21:08:03.207938 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 21:08:03.208181 Server 0: Starting election, epoch=21, zxid=(1,2)
+ZK1 2025/11/27 21:08:03.208528 Server 1: Stepping down from 1 to Looking due to epoch 21
+ZK4 2025/11/27 21:08:03.208547 Server 4: Stepping down from 1 to Looking due to epoch 21
+ZK2 2025/11/27 21:08:03.208541 Server 2: Stepping down from 2 to Looking due to epoch 21
+ZK0 2025/11/27 21:08:03.210008 Server 0: Election finalized, leader=4, epoch=21
+ZK2 2025/11/27 21:08:03.210153 Server 2: Election finalized, leader=4, epoch=21
+ZK1 2025/11/27 21:08:03.210790 Server 1: Election finalized, leader=4, epoch=21
+ZK4 2025/11/27 21:08:03.210927 Server 4: Election finalized, leader=4, epoch=21
+ZK4 2025/11/27 21:08:03.210986 Server 4: Starting as leader
+ZK1 2025/11/27 21:08:04.263302 Server 1: No heartbeat, re-entering election
+ZK1 2025/11/27 21:08:04.263527 Server 1: Starting election, epoch=22, zxid=(1,2)
+ZK0 2025/11/27 21:08:04.263879 Server 0: Stepping down from 1 to Looking due to epoch 22
+ZK2 2025/11/27 21:08:04.263925 Server 2: Stepping down from 1 to Looking due to epoch 22
+ZK4 2025/11/27 21:08:04.263971 Server 4: Stepping down from 2 to Looking due to epoch 22
+ZK0 2025/11/27 21:08:04.264554 Server 0: Election finalized, leader=1, epoch=22
+ZK2 2025/11/27 21:08:04.264706 Server 2: Election finalized, leader=1, epoch=22
+ZK4 2025/11/27 21:08:04.264741 Server 4: Election finalized, leader=1, epoch=22
+ZK4 2025/11/27 21:08:05.124475 Server 4: No heartbeat, re-entering election
+ZK4 2025/11/27 21:08:05.125087 Server 4: Starting election, epoch=23, zxid=(1,2)
+ZK2 2025/11/27 21:08:05.126523 Server 2: Stepping down from 1 to Looking due to epoch 23
+ZK1 2025/11/27 21:08:05.126533 Server 1: Stepping down from 0 to Looking due to epoch 23
+ZK0 2025/11/27 21:08:05.126528 Server 0: Stepping down from 1 to Looking due to epoch 23
+ZK4 2025/11/27 21:08:05.130286 Server 4: Election finalized, leader=2, epoch=23
+ZK1 2025/11/27 21:08:05.130881 Server 1: Election finalized, leader=2, epoch=23
+ZK2 2025/11/27 21:08:05.131181 Server 2: Election finalized, leader=2, epoch=23
+ZK2 2025/11/27 21:08:05.131500 Server 2: Starting as leader
+ZK0 2025/11/27 21:08:05.132544 Server 0: Election finalized, leader=2, epoch=23
+ZK4 2025/11/27 21:08:06.396410 Server 4: No heartbeat, re-entering election
+ZK4 2025/11/27 21:08:06.396659 Server 4: Starting election, epoch=24, zxid=(1,2)
+ZK2 2025/11/27 21:08:06.397434 Server 2: Stepping down from 2 to Looking due to epoch 24
+ZK0 2025/11/27 21:08:06.397508 Server 0: Stepping down from 1 to Looking due to epoch 24
+ZK1 2025/11/27 21:08:06.397508 Server 1: Stepping down from 1 to Looking due to epoch 24
+ZK0 2025/11/27 21:08:06.398936 Server 0: Election finalized, leader=4, epoch=24
+ZK4 2025/11/27 21:08:06.399097 Server 4: Election finalized, leader=4, epoch=24
+ZK4 2025/11/27 21:08:06.399351 Server 4: Starting as leader
+ZK1 2025/11/27 21:08:06.399490 Server 1: Election finalized, leader=4, epoch=24
+ZK2 2025/11/27 21:08:06.400048 Server 2: Election finalized, leader=4, epoch=24
+ZK0 2025/11/27 21:08:07.265609 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 21:08:07.265785 Server 0: Starting election, epoch=25, zxid=(1,2)
+ZK4 2025/11/27 21:08:07.266131 Server 4: Stepping down from 2 to Looking due to epoch 25
+ZK2 2025/11/27 21:08:07.266170 Server 2: Stepping down from 1 to Looking due to epoch 25
+ZK1 2025/11/27 21:08:07.266170 Server 1: Stepping down from 1 to Looking due to epoch 25
+ZK2 2025/11/27 21:08:07.267621 Server 2: Election finalized, leader=2, epoch=25
+ZK4 2025/11/27 21:08:07.267631 Server 4: Election finalized, leader=2, epoch=25
+ZK0 2025/11/27 21:08:07.267804 Server 0: Election finalized, leader=2, epoch=25
+ZK2 2025/11/27 21:08:07.267870 Server 2: Starting as leader
+ZK1 2025/11/27 21:08:07.267913 Server 1: Election finalized, leader=2, epoch=25
+ZK0 2025/11/27 21:08:08.158829 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 21:08:08.159425 Server 0: Starting election, epoch=26, zxid=(1,2)
+ZK1 2025/11/27 21:08:08.160061 Server 1: Stepping down from 1 to Looking due to epoch 26
+ZK2 2025/11/27 21:08:08.160148 Server 2: Stepping down from 2 to Looking due to epoch 26
+ZK4 2025/11/27 21:08:08.160189 Server 4: Stepping down from 1 to Looking due to epoch 26
+ZK2 2025/11/27 21:08:08.161989 Server 2: Election finalized, leader=4, epoch=26
+ZK0 2025/11/27 21:08:08.162177 Server 0: Election finalized, leader=4, epoch=26
+ZK4 2025/11/27 21:08:08.162498 Server 4: Election finalized, leader=4, epoch=26
+ZK4 2025/11/27 21:08:08.162739 Server 4: Starting as leader
+ZK1 2025/11/27 21:08:08.162927 Server 1: Election finalized, leader=4, epoch=26
+ZK1 2025/11/27 21:08:09.137676 Server 1: No heartbeat, re-entering election
+ZK1 2025/11/27 21:08:09.137909 Server 1: Starting election, epoch=27, zxid=(1,2)
+ZK2 2025/11/27 21:08:09.138395 Server 2: Stepping down from 1 to Looking due to epoch 27
+ZK4 2025/11/27 21:08:09.138419 Server 4: Stepping down from 2 to Looking due to epoch 27
+ZK0 2025/11/27 21:08:09.138419 Server 0: Stepping down from 1 to Looking due to epoch 27
+ZK0 2025/11/27 21:08:09.139025 Server 0: Election finalized, leader=1, epoch=27
+ZK4 2025/11/27 21:08:09.139228 Server 4: Election finalized, leader=1, epoch=27
+ZK2 2025/11/27 21:08:09.139664 Server 2: Election finalized, leader=1, epoch=27
+ZK4 2025/11/27 21:08:09.941047 Server 4: No heartbeat, re-entering election
+ZK4 2025/11/27 21:08:09.941768 Server 4: Starting election, epoch=28, zxid=(1,2)
+ZK2 2025/11/27 21:08:09.942977 Server 2: Stepping down from 1 to Looking due to epoch 28
+ZK1 2025/11/27 21:08:09.943135 Server 1: Stepping down from 0 to Looking due to epoch 28
+ZK0 2025/11/27 21:08:09.943161 Server 0: Stepping down from 1 to Looking due to epoch 28
+ZK4 2025/11/27 21:08:09.946298 Server 4: Election finalized, leader=2, epoch=28
+ZK0 2025/11/27 21:08:09.946532 Server 0: Election finalized, leader=2, epoch=28
+ZK2 2025/11/27 21:08:09.946539 Server 2: Election finalized, leader=2, epoch=28
+ZK2 2025/11/27 21:08:09.947003 Server 2: Starting as leader
+ZK1 2025/11/27 21:08:09.947130 Server 1: Election finalized, leader=2, epoch=28
+ZK1 2025/11/27 21:08:11.680592 Server 1: No heartbeat, re-entering election
+ZK1 2025/11/27 21:08:11.681106 Server 1: Starting election, epoch=29, zxid=(1,2)
+ZK0 2025/11/27 21:08:11.682215 Server 0: Stepping down from 1 to Looking due to epoch 29
+ZK2 2025/11/27 21:08:11.682461 Server 2: Stepping down from 2 to Looking due to epoch 29
+ZK4 2025/11/27 21:08:11.682461 Server 4: Stepping down from 1 to Looking due to epoch 29
+ZK2 2025/11/27 21:08:11.684600 Server 2: Election finalized, leader=1, epoch=29
+ZK4 2025/11/27 21:08:11.686189 Server 4: Election finalized, leader=1, epoch=29
+ZK0 2025/11/27 21:08:11.686754 Server 0: Election finalized, leader=4, epoch=29
+ZK1 2025/11/27 21:08:11.687206 Server 1: Election finalized, leader=4, epoch=29
+ZK0 2025/11/27 21:08:12.513539 Server 0: No heartbeat, re-entering election
+ZK0 2025/11/27 21:08:12.514228 Server 0: Starting election, epoch=30, zxid=(1,2)
+ZK4 2025/11/27 21:08:12.515425 Server 4: Stepping down from 1 to Looking due to epoch 30
+ZK1 2025/11/27 21:08:12.515457 Server 1: Stepping down from 1 to Looking due to epoch 30
+ZK2 2025/11/27 21:08:12.515623 Server 2: Stepping down from 1 to Looking due to epoch 30
+ZK2 2025/11/27 21:08:12.518969 Server 2: Election finalized, leader=4, epoch=30
+ZK4 2025/11/27 21:08:12.521678 Server 4: Election finalized, leader=4, epoch=30
+ZK1 2025/11/27 21:08:12.522585 Server 1: Election finalized, leader=4, epoch=30
+ZK4 2025/11/27 21:08:12.522965 Server 4: Starting as leader
+ZK0 2025/11/27 21:08:12.523061 Server 0: Election finalized, leader=4, epoch=30
+ZK2 2025/11/27 21:08:14.533422 Server 2: No heartbeat, re-entering election
+ZK2 2025/11/27 21:08:14.534036 Server 2: Starting election, epoch=31, zxid=(1,2)
+ZK0 2025/11/27 21:08:14.534886 Server 0: Stepping down from 1 to Looking due to epoch 31
+ZK4 2025/11/27 21:08:14.535429 Server 4: Stepping down from 2 to Looking due to epoch 31
+ZK1 2025/11/27 21:08:14.535499 Server 1: Stepping down from 1 to Looking due to epoch 31
+ZK4 2025/11/27 21:08:14.536913 Server 4: Election finalized, leader=2, epoch=31
+ZK1 2025/11/27 21:08:14.537995 Server 1: Election finalized, leader=2, epoch=31
+ZK0 2025/11/27 21:08:14.538210 Server 0: Election finalized, leader=2, epoch=31
+ZK2 2025/11/27 21:08:14.541357 Server 2: Election finalized, leader=2, epoch=31
+ZK2 2025/11/27 21:08:14.541781 Server 2: Starting as leader
+ZK1 2025/11/27 21:08:15.543946 Server 1: No heartbeat, re-entering election
+ZK1 2025/11/27 21:08:15.544811 Server 1: Starting election, epoch=32, zxid=(1,2)
+ZK0 2025/11/27 21:08:15.545974 Server 0: Stepping down from 1 to Looking due to epoch 32
+ZK2 2025/11/27 21:08:15.546302 Server 2: Stepping down from 2 to Looking due to epoch 32
+ZK4 2025/11/27 21:08:15.546390 Server 4: Stepping down from 1 to Looking due to epoch 32
+ZK2 2025/11/27 21:08:15.548273 Server 2: Election finalized, leader=1, epoch=32
+ZK1 2025/11/27 21:08:15.548798 Server 1: Election finalized, leader=1, epoch=32
+ZK1 2025/11/27 21:08:15.548917 Server 1: Starting as leader
+ZK4 2025/11/27 21:08:15.550920 Server 4: Election finalized, leader=1, epoch=32
+ZK4 2025/11/27 21:08:17.040865 Server 4: No heartbeat, re-entering election
+ZK4 2025/11/27 21:08:17.041423 Server 4: Starting election, epoch=33, zxid=(1,2)
+ZK0 2025/11/27 21:08:17.042464 Server 0: Stepping down from 1 to Looking due to epoch 33
+ZK2 2025/11/27 21:08:17.042897 Server 2: Stepping down from 1 to Looking due to epoch 33
+ZK1 2025/11/27 21:08:17.042897 Server 1: Stepping down from 2 to Looking due to epoch 33
+ZK1 2025/11/27 21:08:17.044437 Server 1: Election finalized, leader=4, epoch=33
+ZK2 2025/11/27 21:08:17.045985 Server 2: Election finalized, leader=4, epoch=33
+ZK0 2025/11/27 21:08:17.046973 Server 0: Election finalized, leader=4, epoch=33
+ZK4 2025/11/27 21:08:17.056295 Server 4: Election finalized, leader=4, epoch=33
+ZK4 2025/11/27 21:08:17.056404 Server 4: Starting as leader
+ZK3 2025/11/27 21:08:17.475222 Server 3: Starting election, epoch=2, zxid=(1,2)
+ZK3 2025/11/27 21:08:17.475775 Server 3: Stepping down from 0 to Looking due to epoch 33
+ZK3 2025/11/27 21:08:17.475936 Server 3: Election finalized, leader=4, epoch=33
+ZK1 2025/11/27 21:08:17.940896 Server 1: No heartbeat, re-entering election
+ZK1 2025/11/27 21:08:17.941116 Server 1: Starting election, epoch=34, zxid=(1,2)
+ZK3 2025/11/27 21:08:17.941612 Server 3: Stepping down from 1 to Looking due to epoch 34
+ZK4 2025/11/27 21:08:17.941695 Server 4: Stepping down from 2 to Looking due to epoch 34
+ZK0 2025/11/27 21:08:17.941632 Server 0: Stepping down from 1 to Looking due to epoch 34
+ZK2 2025/11/27 21:08:17.941638 Server 2: Stepping down from 1 to Looking due to epoch 34
+ZK0 2025/11/27 21:08:17.942658 Server 0: Election finalized, leader=1, epoch=34
+ZK2 2025/11/27 21:08:17.942996 Server 2: Election finalized, leader=1, epoch=34
+ZK3 2025/11/27 21:08:17.943316 Server 3: Election finalized, leader=1, epoch=34
+ZK4 2025/11/27 21:08:17.943349 Server 4: Election finalized, leader=2, epoch=34
+ZK1 2025/11/27 21:08:17.943752 Server 1: Election finalized, leader=1, epoch=34
+ZK1 2025/11/27 21:08:17.943820 Server 1: Starting as leader
+ZK1 2025/11/27 21:08:17.947597 Server 1: Now leading with epoch 34
+2025/11/27 21:08:17 apply error: server 1 applied uncommitted index 2 > committed 1
+exit status 1
+FAIL	6.5840/zookeeper	59.887s
